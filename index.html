@@ -11,6 +11,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <style>
+
         * {
             box-sizing: border-box;
             margin: 0;
@@ -45,8 +46,8 @@
             pointer-events: none;
 
             background:
-                radial-gradient(circle at 15% 20%, rgba(74, 154, 255, .12), transparent 25%),
-                radial-gradient(circle at 85% 75%, rgba(57, 202, 255, .10), transparent 28%),
+                radial-gradient(circle at 15% 20%, rgba(74,154,255,.12), transparent 25%),
+                radial-gradient(circle at 85% 75%, rgba(57,202,255,.10), transparent 28%),
                 linear-gradient(145deg, #061329, #0a1c3b 50%, #041024);
 
             z-index: -2;
@@ -64,7 +65,7 @@
             inset: 0;
             pointer-events: none;
 
-            color: rgba(190, 231, 255, .42);
+            color: rgba(190,231,255,.42);
             font-size: 13px;
             line-height: 7;
             letter-spacing: 18px;
@@ -73,6 +74,7 @@
 
             z-index: -1;
         }
+
 
         /* =========================
            LOGIN
@@ -89,7 +91,7 @@
             padding: 20px;
 
             background:
-                radial-gradient(circle at 50% 0%, rgba(64, 145, 235, .22), transparent 38%),
+                radial-gradient(circle at 50% 0%, rgba(64,145,235,.22), transparent 38%),
                 linear-gradient(145deg, #061329, #091c3b 55%, #041024);
         }
 
@@ -98,18 +100,17 @@
 
             padding: 38px 34px;
 
-            background: rgba(9, 27, 55, .92);
+            background: rgba(9,27,55,.92);
 
-            border:
-                1px solid rgba(142, 216, 255, .22);
+            border: 1px solid rgba(142,216,255,.22);
 
             border-radius: 24px;
 
             text-align: center;
 
             box-shadow:
-                0 25px 80px rgba(0, 0, 0, .45),
-                0 0 45px rgba(61, 142, 234, .10);
+                0 25px 80px rgba(0,0,0,.45),
+                0 0 45px rgba(61,142,234,.10);
 
             backdrop-filter: blur(12px);
         }
@@ -118,11 +119,9 @@
             font-size: 42px;
             margin-bottom: 10px;
 
-            filter:
-                drop-shadow(
-                    0 0 12px
-                    rgba(142, 216, 255, .35)
-                );
+            filter: drop-shadow(
+                0 0 12px rgba(142,216,255,.35)
+            );
         }
 
         .login-box h1 {
@@ -142,11 +141,9 @@
             padding: 14px 16px;
 
             background: #06162d;
-
             color: white;
 
-            border:
-                1px solid #245282;
+            border: 1px solid #245282;
 
             border-radius: 13px;
 
@@ -161,8 +158,7 @@
             border-color: var(--blue-light);
 
             box-shadow:
-                0 0 0 3px
-                rgba(142, 216, 255, .10);
+                0 0 0 3px rgba(142,216,255,.10);
         }
 
         #enter-button {
@@ -171,20 +167,14 @@
             padding: 14px;
 
             border: none;
-
             border-radius: 13px;
 
             background:
-                linear-gradient(
-                    135deg,
-                    #3d8eea,
-                    #58b7f4
-                );
+                linear-gradient(135deg, #3d8eea, #58b7f4);
 
             color: white;
 
             font-size: 16px;
-
             font-weight: bold;
 
             cursor: pointer;
@@ -192,8 +182,7 @@
             transition: .2s;
 
             box-shadow:
-                0 8px 22px
-                rgba(61, 142, 234, .25);
+                0 8px 22px rgba(61,142,234,.25);
         }
 
         #enter-button:hover {
@@ -223,16 +212,13 @@
 
             padding: 0 20px;
 
-            background:
-                rgba(5, 19, 42, .94);
+            background: rgba(5,19,42,.94);
 
             border-bottom:
-                1px solid
-                rgba(142, 216, 255, .15);
+                1px solid rgba(142,216,255,.15);
 
             box-shadow:
-                0 5px 25px
-                rgba(0, 0, 0, .18);
+                0 5px 25px rgba(0,0,0,.18);
 
             backdrop-filter: blur(12px);
         }
@@ -252,21 +238,15 @@
             justify-content: center;
 
             background:
-                linear-gradient(
-                    145deg,
-                    #164f8d,
-                    #237bc2
-                );
+                linear-gradient(145deg, #164f8d, #237bc2);
 
             border:
-                1px solid
-                rgba(142, 216, 255, .25);
+                1px solid rgba(142,216,255,.25);
 
             border-radius: 50%;
 
             box-shadow:
-                0 0 20px
-                rgba(61, 142, 234, .20);
+                0 0 20px rgba(61,142,234,.20);
         }
 
         .chat-title h2 {
@@ -280,9 +260,7 @@
 
         .online::before {
             content: "●";
-
             color: #69d7ff;
-
             margin-right: 5px;
 
             text-shadow:
@@ -296,7 +274,7 @@
 
 
         /* =========================
-           LLAMADA
+           HEADER / AUDIO
         ========================== */
 
         .header-actions {
@@ -310,13 +288,12 @@
             height: 46px;
 
             border:
-                1px solid
-                rgba(142, 216, 255, .22);
+                1px solid rgba(142,216,255,.22);
 
             border-radius: 50%;
 
             background:
-                rgba(19, 52, 91, .85);
+                rgba(19,52,91,.85);
 
             color: white;
 
@@ -327,31 +304,25 @@
             transition: .2s;
 
             box-shadow:
-                0 5px 18px
-                rgba(0, 0, 0, .18);
+                0 5px 18px rgba(0,0,0,.18);
         }
 
         #mic-button:hover {
             transform: scale(1.06);
 
             border-color:
-                rgba(142, 216, 255, .55);
+                rgba(142,216,255,.55);
         }
 
         #mic-button.active {
             background:
-                linear-gradient(
-                    145deg,
-                    #36b978,
-                    #42d392
-                );
+                linear-gradient(145deg, #36b978, #42d392);
 
             border-color:
-                rgba(190, 255, 224, .65);
+                rgba(190,255,224,.65);
 
             box-shadow:
-                0 0 22px
-                rgba(66, 211, 146, .30);
+                0 0 22px rgba(66,211,146,.30);
         }
 
         #mic-button.waiting {
@@ -361,18 +332,16 @@
 
         @keyframes pulseMic {
 
-            0%,
-            100% {
+            0%, 100% {
                 box-shadow:
-                    0 0 0 0
-                    rgba(66, 211, 146, .35);
+                    0 0 0 0 rgba(66,211,146,.35);
             }
 
             50% {
                 box-shadow:
-                    0 0 0 9px
-                    rgba(66, 211, 146, 0);
+                    0 0 0 9px rgba(66,211,146,0);
             }
+
         }
 
         #audio-status {
@@ -393,11 +362,10 @@
             border-radius: 12px;
 
             background:
-                rgba(7, 25, 52, .92);
+                rgba(7,25,52,.92);
 
             border:
-                1px solid
-                rgba(142, 216, 255, .16);
+                1px solid rgba(142,216,255,.16);
 
             color: #a9c8e5;
 
@@ -414,7 +382,7 @@
             color: #9df0c7;
 
             border-color:
-                rgba(66, 211, 146, .25);
+                rgba(66,211,146,.25);
         }
 
         #remote-audio {
@@ -434,7 +402,6 @@
             padding: 24px 20px;
 
             display: flex;
-
             flex-direction: column;
 
             gap: 13px;
@@ -442,12 +409,12 @@
             background:
                 radial-gradient(
                     circle at 20% 15%,
-                    rgba(55, 130, 210, .08),
+                    rgba(55,130,210,.08),
                     transparent 25%
                 ),
                 radial-gradient(
                     circle at 80% 80%,
-                    rgba(75, 178, 240, .07),
+                    rgba(75,178,240,.07),
                     transparent 28%
                 ),
                 #06152d;
@@ -461,7 +428,7 @@
 
         #messages::-webkit-scrollbar-track {
             background:
-                rgba(255, 255, 255, .03);
+                rgba(255,255,255,.03);
         }
 
         #messages::-webkit-scrollbar-thumb {
@@ -489,15 +456,11 @@
             align-self: flex-start;
 
             border:
-                1px solid
-                rgba(215, 246, 255, .55);
+                1px solid rgba(215,246,255,.55);
 
             box-shadow:
-                0 7px 20px
-                rgba(0, 0, 0, .18),
-
-                0 0 18px
-                rgba(117, 201, 245, .08);
+                0 7px 20px rgba(0,0,0,.18),
+                0 0 18px rgba(117,201,245,.08);
 
             animation:
                 messageIn .2s ease-out;
@@ -535,8 +498,7 @@
             font-size: 11px;
 
             text-shadow:
-                0 0 6px
-                rgba(255, 248, 189, .9);
+                0 0 6px rgba(255,248,189,.9);
         }
 
         .star.small {
@@ -576,6 +538,52 @@
 
 
         /* =========================
+           IMÁGENES
+        ========================== */
+
+        .message-image {
+            display: block;
+
+            width: 100%;
+            max-width: 330px;
+
+            max-height: 420px;
+
+            object-fit: cover;
+
+            margin-top: 8px;
+
+            border-radius: 12px;
+
+            border:
+                1px solid rgba(255,255,255,.35);
+
+            cursor: pointer;
+
+            box-shadow:
+                0 5px 15px rgba(0,0,0,.18);
+
+            transition: .2s;
+        }
+
+        .message-image:hover {
+            transform: scale(1.015);
+        }
+
+        .image-url-label {
+            display: block;
+
+            margin-top: 5px;
+
+            font-size: 10px;
+
+            color: #326080;
+
+            opacity: .8;
+        }
+
+
+        /* =========================
            SISTEMA
         ========================== */
 
@@ -587,13 +595,12 @@
             text-align: center;
 
             background:
-                rgba(20, 54, 91, .45);
+                rgba(20,54,91,.45);
 
             color: #86b9dc;
 
             border:
-                1px solid
-                rgba(134, 185, 220, .10);
+                1px solid rgba(134,185,220,.10);
 
             padding: 9px 14px;
 
@@ -621,11 +628,10 @@
             padding: 8px 12px;
 
             background:
-                rgba(13, 35, 69, .96);
+                rgba(13,35,69,.96);
 
             border-top:
-                1px solid
-                rgba(142, 216, 255, .12);
+                1px solid rgba(142,216,255,.12);
         }
 
         .reply-box.show {
@@ -638,15 +644,13 @@
             min-width: 0;
 
             border-left:
-                3px solid
-                var(--blue-light);
+                3px solid var(--blue-light);
 
             padding-left: 9px;
         }
 
         .reply-label {
             font-size: 11px;
-
             color: #8ed8ff;
 
             margin-bottom: 2px;
@@ -688,11 +692,10 @@
             padding: 7px 9px;
 
             border-left:
-                3px solid
-                #3d8eea;
+                3px solid #3d8eea;
 
             background:
-                rgba(8, 32, 61, .10);
+                rgba(8,32,61,.10);
 
             border-radius: 7px;
 
@@ -749,30 +752,30 @@
 
 
         /* =========================
-           CAJA MENSAJE
+           CAJA DE MENSAJE
         ========================== */
 
         .message-area {
             display: flex;
 
-            gap: 10px;
+            gap: 8px;
 
             padding: 13px 15px;
 
             background:
-                rgba(7, 25, 52, .97);
+                rgba(7,25,52,.97);
 
             border-top:
-                1px solid
-                rgba(142, 216, 255, .15);
+                1px solid rgba(142,216,255,.15);
 
             box-shadow:
-                0 -7px 25px
-                rgba(0, 0, 0, .16);
+                0 -7px 25px rgba(0,0,0,.16);
         }
 
         #message-input {
             flex: 1;
+
+            min-width: 0;
 
             padding: 13px 16px;
 
@@ -790,13 +793,12 @@
             font-size: 15px;
 
             box-shadow:
-                inset 0 2px 8px
-                rgba(0, 0, 0, .12);
+                inset 0 2px 8px rgba(0,0,0,.12);
         }
 
         #message-input::placeholder {
             color:
-                rgba(235, 249, 255, .72);
+                rgba(235,249,255,.72);
         }
 
         #message-input:focus {
@@ -805,15 +807,42 @@
             border-color: #8ed8ff;
 
             box-shadow:
-                0 0 0 3px
-                rgba(142, 216, 255, .10),
+                0 0 0 3px rgba(142,216,255,.10),
+                inset 0 2px 8px rgba(0,0,0,.12);
+        }
 
-                inset 0 2px 8px
-                rgba(0, 0, 0, .12);
+        .extra-button {
+            width: 48px;
+
+            flex-shrink: 0;
+
+            border: none;
+
+            border-radius: 13px;
+
+            background:
+                rgba(32,79,126,.95);
+
+            color: white;
+
+            font-size: 19px;
+
+            cursor: pointer;
+
+            transition: .2s;
+        }
+
+        .extra-button:hover {
+            transform: scale(1.05);
+
+            background:
+                rgba(48,105,164,1);
         }
 
         #send-button {
             width: 52px;
+
+            flex-shrink: 0;
 
             border: none;
 
@@ -835,33 +864,13 @@
             transition: .2s;
 
             box-shadow:
-                0 7px 18px
-                rgba(50, 133, 208, .25);
+                0 7px 18px rgba(50,133,208,.25);
         }
 
         #send-button:hover {
             transform:
                 scale(1.05)
                 rotate(-2deg);
-        }
-
-        @keyframes messageIn {
-
-            from {
-                opacity: 0;
-
-                transform:
-                    translateY(5px)
-                    scale(.98);
-            }
-
-            to {
-                opacity: 1;
-
-                transform:
-                    translateY(0)
-                    scale(1);
-            }
         }
 
 
@@ -886,19 +895,17 @@
             border-radius: 12px;
 
             background:
-                rgba(7, 25, 52, .95);
+                rgba(7,25,52,.95);
 
             border:
-                1px solid
-                rgba(142, 216, 255, .18);
+                1px solid rgba(142,216,255,.18);
 
             color: #bfe7ff;
 
             font-size: 12px;
 
             box-shadow:
-                0 8px 25px
-                rgba(0, 0, 0, .25);
+                0 8px 25px rgba(0,0,0,.25);
         }
 
         #notification-status.show {
@@ -934,10 +941,21 @@
 
             .message-area {
                 padding: 10px;
+                gap: 6px;
             }
 
             #message-input {
                 min-width: 0;
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+
+            .extra-button {
+                width: 44px;
+            }
+
+            #send-button {
+                width: 48px;
             }
 
             #audio-status {
@@ -946,10 +964,34 @@
             }
 
         }
+
+
+        @keyframes messageIn {
+
+            from {
+                opacity: 0;
+
+                transform:
+                    translateY(5px)
+                    scale(.98);
+            }
+
+            to {
+                opacity: 1;
+
+                transform:
+                    translateY(0)
+                    scale(1);
+            }
+
+        }
+
     </style>
 </head>
 
+
 <body>
+
 
     <!-- =========================
          LOGIN
@@ -995,6 +1037,7 @@
 
     <main id="chat-screen">
 
+
         <header class="chat-header">
 
             <div class="chat-title">
@@ -1022,6 +1065,7 @@
 
                 <div id="current-user"></div>
 
+                <!-- AUDIO: NO TOCADO -->
                 <button
                     id="mic-button"
                     type="button"
@@ -1046,7 +1090,9 @@
         ></audio>
 
 
-        <!-- MENSAJES -->
+        <!-- =========================
+             MENSAJES
+        ========================== -->
 
         <section id="messages">
 
@@ -1054,17 +1100,13 @@
 
                 <div class="name-wrap">
 
-                    <span class="star">
-                        ✦
-                    </span>
+                    <span class="star">✦</span>
 
                     <div class="name">
                         💬 Sistema
                     </div>
 
-                    <span class="star">
-                        ✦
-                    </span>
+                    <span class="star">✦</span>
 
                 </div>
 
@@ -1123,6 +1165,17 @@
             id="message-form"
         >
 
+            <!-- IMAGEN URL -->
+            <button
+                type="button"
+                class="extra-button"
+                id="image-button"
+                title="Enviar imagen mediante URL"
+                aria-label="Enviar imagen mediante URL"
+            >
+                🖼️
+            </button>
+
             <input
                 type="text"
                 id="message-input"
@@ -1147,6 +1200,7 @@
 
 
     <script>
+
 
         /* =====================================
            SUPABASE
@@ -1219,6 +1273,11 @@
                 "notification-status"
             );
 
+        const imageButton =
+            document.getElementById(
+                "image-button"
+            );
+
 
         /* =====================================
            VARIABLES
@@ -1226,14 +1285,9 @@
 
         let username = "";
 
-        /*
-         * Ahora replyTarget NO es solamente visual.
-         *
-         * Se utiliza para construir un mensaje
-         * especial que sí se guarda en Supabase.
-         */
-
         let replyTarget = null;
+
+        let pendingImageUrl = null;
 
         let notificationTitle =
             document.title;
@@ -1252,6 +1306,7 @@
 
         /* =====================================
            AUDIO / WEBRTC
+           ORIGINAL
         ====================================== */
 
         let audioChannel = null;
@@ -1338,7 +1393,7 @@
 
 
         /* =====================================
-           ENTRAR AL CHAT
+           ENTRAR
         ====================================== */
 
         async function enterChat() {
@@ -1402,24 +1457,6 @@
            PARSEAR MENSAJE
         ====================================== */
 
-        /*
-         * Los mensajes normales siguen siendo texto.
-         *
-         * Los mensajes de respuesta se guardan así:
-         *
-         * {
-         *   "__reply": true,
-         *   "reply": {
-         *      "username": "...",
-         *      "message": "..."
-         *   },
-         *   "message": "Mi respuesta"
-         * }
-         *
-         * De esta forma no necesitamos crear
-         * columnas nuevas en Supabase.
-         */
-
         function parseStoredMessage(
             message
         ) {
@@ -1429,14 +1466,20 @@
             ) {
 
                 return {
-
                     text: "",
-                    reply: null
-
+                    reply: null,
+                    image: null
                 };
 
             }
 
+
+            /*
+             * Primero intentamos JSON.
+             *
+             * Si falla:
+             * ES UN MENSAJE NORMAL.
+             */
 
             try {
 
@@ -1445,7 +1488,7 @@
 
                 if (
                     parsed &&
-                    parsed.__reply === true &&
+                    parsed.__chat === true &&
                     typeof parsed.message === "string"
                 ) {
 
@@ -1455,7 +1498,10 @@
                             parsed.message,
 
                         reply:
-                            parsed.reply || null
+                            parsed.reply || null,
+
+                        image:
+                            parsed.image || null
 
                     };
 
@@ -1464,9 +1510,8 @@
             } catch (error) {
 
                 /*
-                 * No pasa nada.
-                 * Si no es JSON, es un mensaje
-                 * normal antiguo.
+                 * No hacer nada.
+                 * El mensaje sigue siendo válido.
                  */
 
             }
@@ -1478,9 +1523,39 @@
                     message,
 
                 reply:
+                    null,
+
+                image:
                     null
 
             };
+
+        }
+
+
+        /* =====================================
+           VALIDAR URL DE IMAGEN
+        ====================================== */
+
+        function isValidImageUrl(
+            url
+        ) {
+
+            try {
+
+                const parsed =
+                    new URL(url);
+
+                return (
+                    parsed.protocol === "http:" ||
+                    parsed.protocol === "https:"
+                );
+
+            } catch {
+
+                return false;
+
+            }
 
         }
 
@@ -1655,10 +1730,6 @@
             }
 
 
-            /*
-             * Parseamos el contenido guardado.
-             */
-
             const parsed =
                 parseStoredMessage(
                     message.message
@@ -1745,7 +1816,7 @@
 
 
             /* =========================
-               RESPUESTA GUARDADA
+               REPLY
             ========================== */
 
             if (
@@ -1817,6 +1888,86 @@
 
 
             /* =========================
+               IMAGEN
+            ========================== */
+
+            if (
+                parsed.image &&
+                isValidImageUrl(
+                    parsed.image
+                )
+            ) {
+
+                const image =
+                    document.createElement("img");
+
+                image.classList.add(
+                    "message-image"
+                );
+
+                image.src =
+                    parsed.image;
+
+                image.alt =
+                    "Imagen enviada por " +
+                    message.username;
+
+                image.loading =
+                    "lazy";
+
+                image.referrerPolicy =
+                    "no-referrer";
+
+
+                image.addEventListener(
+                    "error",
+                    () => {
+
+                        image.remove();
+
+                        const failed =
+                            document.createElement(
+                                "div"
+                            );
+
+                        failed.classList.add(
+                            "image-url-label"
+                        );
+
+                        failed.textContent =
+                            "⚠️ No se pudo cargar la imagen";
+
+                        element.insertBefore(
+                            failed,
+                            time
+                        );
+
+                    }
+                );
+
+
+                image.addEventListener(
+                    "click",
+                    () => {
+
+                        window.open(
+                            parsed.image,
+                            "_blank",
+                            "noopener,noreferrer"
+                        );
+
+                    }
+                );
+
+
+                element.appendChild(
+                    image
+                );
+
+            }
+
+
+            /* =========================
                HORA
             ========================== */
 
@@ -1867,12 +2018,6 @@
                 "click",
                 () => {
 
-                    /*
-                     * Al responder un mensaje,
-                     * usamos el texto REAL que
-                     * se muestra, no el JSON.
-                     */
-
                     startReply({
 
                         id:
@@ -1882,7 +2027,12 @@
                             message.username,
 
                         message:
-                            parsed.text
+                            parsed.text ||
+                            (
+                                parsed.image
+                                    ? "🖼️ Imagen"
+                                    : "Mensaje"
+                            )
 
                     });
 
@@ -1927,7 +2077,7 @@
 
 
         /* =====================================
-           RESPONDER
+           REPLY
         ====================================== */
 
         function startReply(
@@ -1943,7 +2093,7 @@
                     message.username,
 
                 message:
-                    message.message || ""
+                    message.message || "Mensaje"
 
             };
 
@@ -1953,8 +2103,7 @@
 
 
             replyPreview.textContent =
-                replyTarget.message ||
-                "Mensaje";
+                replyTarget.message;
 
 
             replyBox.classList.add(
@@ -2003,6 +2152,68 @@
 
 
         /* =====================================
+           IMAGEN POR URL
+        ====================================== */
+
+        imageButton.addEventListener(
+            "click",
+            () => {
+
+                const url =
+                    prompt(
+                        "Pega aquí la URL directa de la imagen:"
+                    );
+
+
+                if (!url) {
+
+                    return;
+
+                }
+
+
+                const cleanUrl =
+                    url.trim();
+
+
+                if (
+                    !isValidImageUrl(
+                        cleanUrl
+                    )
+                ) {
+
+                    alert(
+                        "Esa no parece una URL válida."
+                    );
+
+                    return;
+
+                }
+
+
+                pendingImageUrl =
+                    cleanUrl;
+
+
+                imageButton.textContent =
+                    "✅";
+
+
+                imageButton.title =
+                    "Imagen preparada para enviar";
+
+
+                messageInput.placeholder =
+                    "Escribe algo o envía la imagen...";
+
+
+                messageInput.focus();
+
+            }
+        );
+
+
+        /* =====================================
            NOTIFICACIONES
         ====================================== */
 
@@ -2024,7 +2235,18 @@
 
                 try {
 
-                    await Notification.requestPermission();
+                    const permission =
+                        await Notification.requestPermission();
+
+                    if (
+                        permission === "granted"
+                    ) {
+
+                        showNotificationStatus(
+                            "🔔 Notificaciones activadas"
+                        );
+
+                    }
 
                 } catch (error) {
 
@@ -2114,7 +2336,11 @@
 
             let body =
                 parsed.text ||
-                "Nuevo mensaje";
+                (
+                    parsed.image
+                        ? "🖼️ Nueva imagen"
+                        : "Nuevo mensaje"
+                );
 
 
             if (
@@ -2190,7 +2416,6 @@
             let visible =
                 false;
 
-
             let count =
                 0;
 
@@ -2244,7 +2469,21 @@
                     messageInput.value.trim();
 
 
-                if (!text) {
+                /*
+                 * Permitimos:
+                 *
+                 * texto
+                 * imagen
+                 * texto + imagen
+                 *
+                 * Pero NUNCA obligamos a usar
+                 * ninguna de estas funciones.
+                 */
+
+                if (
+                    !text &&
+                    !pendingImageUrl
+                ) {
 
                     return;
 
@@ -2253,49 +2492,99 @@
 
                 /*
                  * ==================================
-                 * IMPORTANTE
+                 * MENSAJE NORMAL
                  * ==================================
-                 *
-                 * Si estamos respondiendo,
-                 * guardamos la respuesta dentro
-                 * del propio campo "message".
-                 *
-                 * Así NO necesitamos columnas
-                 * nuevas en Supabase.
                  */
-
 
                 let storedMessage =
                     text;
 
 
+                /*
+                 * ==================================
+                 * INTENTAR CREAR MENSAJE ESPECIAL
+                 * ==================================
+                 */
+
                 if (
-                    replyTarget
+                    replyTarget ||
+                    pendingImageUrl
+                ) {
+
+                    try {
+
+                        const specialMessage = {
+
+                            __chat:
+                                true,
+
+                            message:
+                                text,
+
+                            reply:
+                                replyTarget
+                                    ? {
+
+                                        id:
+                                            replyTarget.id,
+
+                                        username:
+                                            replyTarget.username,
+
+                                        message:
+                                            replyTarget.message
+
+                                    }
+                                    : null,
+
+                            image:
+                                pendingImageUrl ||
+                                null
+
+                        };
+
+
+                        storedMessage =
+                            JSON.stringify(
+                                specialMessage
+                            );
+
+                    } catch (error) {
+
+                        /*
+                         * FALLBACK ABSOLUTO:
+                         *
+                         * Si algo sale mal,
+                         * mandamos solamente
+                         * el texto.
+                         */
+
+                        console.warn(
+                            "No se pudo preparar mensaje especial:",
+                            error
+                        );
+
+                        storedMessage =
+                            text;
+
+                    }
+
+                }
+
+
+                /*
+                 * Si tenemos una imagen pero no texto
+                 * y algo falla, usamos una pequeña
+                 * representación de respaldo.
+                 */
+
+                if (
+                    !storedMessage &&
+                    pendingImageUrl
                 ) {
 
                     storedMessage =
-                        JSON.stringify({
-
-                            __reply:
-                                true,
-
-                            reply: {
-
-                                id:
-                                    replyTarget.id,
-
-                                username:
-                                    replyTarget.username,
-
-                                message:
-                                    replyTarget.message
-
-                            },
-
-                            message:
-                                text
-
-                        });
+                        "🖼️ Imagen";
 
                 }
 
@@ -2314,17 +2603,27 @@
                 };
 
 
+                /*
+                 * ==================================
+                 * INSERT
+                 *
+                 * IMPORTANTE:
+                 *
+                 * NO usamos .select().single()
+                 *
+                 * Así el INSERT no depende de que
+                 * la policy SELECT esté correcta.
+                 * ==================================
+                 */
+
                 const {
-                    data,
                     error
                 } =
                     await supabaseClient
                         .from("messages")
                         .insert(
                             messageData
-                        )
-                        .select()
-                        .single();
+                        );
 
 
                 if (error) {
@@ -2337,7 +2636,7 @@
 
                     alert(
                         "No se pudo enviar el mensaje.\n\n" +
-                        "Error: " +
+                        "Supabase respondió:\n" +
                         error.message
                     );
 
@@ -2348,29 +2647,63 @@
 
 
                 /*
-                 * Mostramos inmediatamente
-                 * nuestro mensaje.
+                 * ==================================
+                 * MOSTRAR LOCALMENTE
+                 *
+                 * No esperamos SELECT.
+                 * Creamos una representación local.
+                 * ==================================
                  */
 
-                if (data) {
+                addMessageToScreen(
+                    {
+                        id:
+                            "local-" +
+                            Date.now() +
+                            "-" +
+                            Math.random()
+                                .toString(36)
+                                .slice(2),
 
-                    addMessageToScreen(
-                        data,
-                        false
-                    );
+                        chat_id:
+                            chatId,
 
-                }
+                        username:
+                            username,
 
+                        message:
+                            storedMessage,
+
+                        created_at:
+                            new Date().toISOString()
+
+                    },
+                    false
+                );
+
+
+                /*
+                 * LIMPIAR
+                 */
 
                 messageInput.value =
                     "";
+
+                pendingImageUrl =
+                    null;
+
+
+                imageButton.textContent =
+                    "🖼️";
+
+                imageButton.title =
+                    "Enviar imagen mediante URL";
 
 
                 clearReply();
 
 
                 messageInput.focus();
-
 
                 scrollToBottom();
 
@@ -2394,11 +2727,14 @@
                 .on(
                     "postgres_changes",
                     {
-                        event: "INSERT",
+                        event:
+                            "INSERT",
 
-                        schema: "public",
+                        schema:
+                            "public",
 
-                        table: "messages",
+                        table:
+                            "messages",
 
                         filter:
                             "chat_id=eq." +
@@ -2413,7 +2749,6 @@
                         );
 
                     }
-
                 )
 
                 .subscribe(
@@ -2432,6 +2767,7 @@
 
         /* =====================================
            AUDIO WEBRTC
+           ORIGINAL
         ====================================== */
 
         async function setupAudioChannel() {
@@ -2461,7 +2797,8 @@
                 .on(
                     "presence",
                     {
-                        event: "sync"
+                        event:
+                            "sync"
                     },
                     handlePresenceSync
                 )
@@ -2469,7 +2806,8 @@
                 .on(
                     "presence",
                     {
-                        event: "join"
+                        event:
+                            "join"
                     },
                     handlePresenceJoin
                 )
@@ -2477,7 +2815,8 @@
                 .on(
                     "broadcast",
                     {
-                        event: "webrtc"
+                        event:
+                            "webrtc"
                     },
 
                     async ({
@@ -2831,7 +3170,7 @@
 
 
         /* =====================================
-           BOTÓN DE LLAMADA
+           BOTÓN LLAMADA
         ====================================== */
 
         micButton.addEventListener(
@@ -2966,7 +3305,7 @@
 
 
         /* =====================================
-           CREAR OFFER
+           OFFER
         ====================================== */
 
         async function createOffer() {
@@ -3027,7 +3366,7 @@
 
 
         /* =====================================
-           ENVIAR SEÑAL
+           SEÑAL
         ====================================== */
 
         async function sendSignal(
