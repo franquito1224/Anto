@@ -1,11 +1,13 @@
-<!DOCTYPE html>
+from pathlib import Path
+
+html = r'''<!DOCTYPE html>
 <html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Chat Privado 🌙</title>
+    <title>Mi otra mitad 🌙</title>
 
     <!-- Supabase -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -27,6 +29,8 @@
             --bubble-2: #75c9f5;
             --text-dark: #08203d;
             --white-blue: #eaf8ff;
+            --call-green: #42d392;
+            --call-red: #ff647c;
         }
 
         body {
@@ -36,10 +40,6 @@
             height: 100vh;
             overflow: hidden;
         }
-
-        /* =========================
-           FONDO DE CIELO NOCTURNO
-        ========================== */
 
         body::before {
             content: "";
@@ -217,6 +217,82 @@
         }
 
         /* =========================
+           CONTROLES DE AUDIO
+        ========================== */
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+        }
+
+        #mic-button {
+            width: 46px;
+            height: 46px;
+            border: 1px solid rgba(142, 216, 255, .22);
+            border-radius: 50%;
+            background: rgba(19, 52, 91, .85);
+            color: white;
+            font-size: 21px;
+            cursor: pointer;
+            transition: .2s;
+            box-shadow: 0 5px 18px rgba(0, 0, 0, .18);
+        }
+
+        #mic-button:hover {
+            transform: scale(1.06);
+            border-color: rgba(142, 216, 255, .55);
+        }
+
+        #mic-button.active {
+            background: linear-gradient(145deg, #36b978, #42d392);
+            border-color: rgba(190, 255, 224, .65);
+            box-shadow: 0 0 22px rgba(66, 211, 146, .30);
+        }
+
+        #mic-button.waiting {
+            animation: pulseMic 1.5s infinite;
+        }
+
+        #audio-status {
+            position: fixed;
+            right: 18px;
+            top: 80px;
+            z-index: 20;
+            display: none;
+            max-width: calc(100vw - 36px);
+            padding: 8px 12px;
+            border-radius: 12px;
+            background: rgba(7, 25, 52, .92);
+            border: 1px solid rgba(142, 216, 255, .16);
+            color: #a9c8e5;
+            font-size: 11px;
+            backdrop-filter: blur(10px);
+        }
+
+        #audio-status.show {
+            display: block;
+        }
+
+        #audio-status.active {
+            color: #9df0c7;
+            border-color: rgba(66, 211, 146, .25);
+        }
+
+        #remote-audio {
+            display: none;
+        }
+
+        @keyframes pulseMic {
+            0%, 100% {
+                box-shadow: 0 0 0 0 rgba(66, 211, 146, .35);
+            }
+            50% {
+                box-shadow: 0 0 0 9px rgba(66, 211, 146, 0);
+            }
+        }
+
+        /* =========================
            MENSAJES
         ========================== */
 
@@ -307,8 +383,6 @@
             color: #326080;
             margin-top: 6px;
         }
-
-        /* MENSAJE DEL SISTEMA */
 
         .system-message {
             align-self: center;
@@ -425,6 +499,11 @@
             #message-input {
                 min-width: 0;
             }
+
+            #audio-status {
+                top: 75px;
+                right: 10px;
+            }
         }
     </style>
 </head>
@@ -441,7 +520,7 @@
 
             <div class="login-icon">🌙</div>
 
-            <h1>Chat Privado</h1>
+            <h1>Mi otra mitad</h1>
 
             <p>
                 Elige el nombre que aparecerá
@@ -457,7 +536,7 @@
             >
 
             <button id="enter-button">
-                Entrar al chat ✦
+                Entrar ✦
             </button>
 
         </div>
@@ -482,20 +561,38 @@
                 <div>
 
                     <h2>
-                        Chat Privado
+                        Mi otra mitad
                     </h2>
 
                     <span class="online">
-                        Chat grupal
+                        Siempre aquí
                     </span>
 
                 </div>
 
             </div>
 
-            <div id="current-user"></div>
+            <div class="header-actions">
+
+                <div id="current-user"></div>
+
+                <!-- Micrófono: la conexión de audio permanece disponible,
+                     pero el micrófono empieza apagado. -->
+                <button
+                    id="mic-button"
+                    type="button"
+                    aria-label="Activar micrófono"
+                    title="Activar micrófono"
+                >📞</button>
+
+            </div>
 
         </header>
+
+        <div id="audio-status"></div>
+
+        <!-- Elemento de audio remoto -->
+        <audio id="remote-audio" autoplay playsinline></audio>
 
 
         <!-- MENSAJES -->
@@ -511,7 +608,7 @@
                 </div>
 
                 <div class="text">
-                    Bienvenido al chat 👋
+                    Bienvenido a tu pequeño rincón bajo las estrellas 👋
                 </div>
 
             </div>
@@ -559,10 +656,6 @@
         const SUPABASE_URL =
             "https://mulzhbuwkunaeurwexpr.supabase.co";
 
-        /*
-           Tu publishable key se mantiene intacta.
-        */
-
         const SUPABASE_KEY =
             "sb_publishable_zuoRx_-W1HYMJDUQ1c49MQ_AUEsQhIr";
 
@@ -578,44 +671,37 @@
         ====================================== */
 
         const loginScreen =
-            document.getElementById(
-                "login-screen"
-            );
+            document.getElementById("login-screen");
 
         const chatScreen =
-            document.getElementById(
-                "chat-screen"
-            );
+            document.getElementById("chat-screen");
 
         const usernameInput =
-            document.getElementById(
-                "username"
-            );
+            document.getElementById("username");
 
         const enterButton =
-            document.getElementById(
-                "enter-button"
-            );
+            document.getElementById("enter-button");
 
         const currentUser =
-            document.getElementById(
-                "current-user"
-            );
+            document.getElementById("current-user");
 
         const messageForm =
-            document.getElementById(
-                "message-form"
-            );
+            document.getElementById("message-form");
 
         const messageInput =
-            document.getElementById(
-                "message-input"
-            );
+            document.getElementById("message-input");
 
         const messages =
-            document.getElementById(
-                "messages"
-            );
+            document.getElementById("messages");
+
+        const micButton =
+            document.getElementById("mic-button");
+
+        const audioStatus =
+            document.getElementById("audio-status");
+
+        const remoteAudio =
+            document.getElementById("remote-audio");
 
 
         /* =====================================
@@ -624,14 +710,6 @@
 
         let username = "";
 
-        /*
-           El chat se identifica mediante:
-
-           ?chat=abc123
-
-           Si no existe, usamos "general".
-        */
-
         const params =
             new URLSearchParams(
                 window.location.search
@@ -639,6 +717,49 @@
 
         const chatId =
             params.get("chat") || "general";
+
+
+        /* =====================================
+           AUDIO WEBRTC
+           Una conexión de audio por chat.
+
+           Supabase Realtime se utiliza para
+           intercambiar la señalización.
+        ====================================== */
+
+        let audioChannel = null;
+        let peerConnection = null;
+        let localStream = null;
+        let localAudioTrack = null;
+
+        let audioStarted = false;
+        let remotePeerPresent = false;
+        let makingOffer = false;
+        let ignoreOffer = false;
+
+        const rtcConfig = {
+            iceServers: [
+                { urls: "stun:stun.l.google.com:19302" },
+                { urls: "stun:stun.cloudflare.com:3478" }
+            ]
+        };
+
+
+        function setAudioStatus(text, active = false) {
+            audioStatus.textContent = text;
+            audioStatus.classList.toggle("show", !!text);
+            audioStatus.classList.toggle("active", active);
+
+            if (text) {
+                clearTimeout(setAudioStatus.hideTimer);
+
+                setAudioStatus.hideTimer = setTimeout(() => {
+                    if (!audioStarted) {
+                        audioStatus.classList.remove("show");
+                    }
+                }, 3500);
+            }
+        }
 
 
         /* =====================================
@@ -669,6 +790,8 @@
             await loadMessages();
 
             subscribeToMessages();
+
+            setupAudioChannel();
 
             messageInput.focus();
         }
@@ -702,13 +825,9 @@
                 data,
                 error
             } = await supabaseClient
-
                 .from("messages")
-
                 .select("*")
-
                 .eq("chat_id", chatId)
-
                 .order(
                     "created_at",
                     {
@@ -739,11 +858,6 @@
 
         /* =====================================
            HORA CORRECTA
-
-           Supabase normalmente entrega timestamps
-           en UTC. Si la base devuelve un timestamp
-           sin zona, lo tratamos como UTC para evitar
-           que aparezca una hora incorrecta.
         ====================================== */
 
         function getMessageDate(timestamp) {
@@ -755,11 +869,6 @@
             const value =
                 String(timestamp).trim();
 
-            /*
-               Si NO tiene Z ni un offset (+00:00),
-               asumimos que viene en UTC.
-            */
-
             const hasTimezone =
                 /(?:Z|[+-]\d{2}:?\d{2})$/i.test(value);
 
@@ -770,10 +879,6 @@
 
             const date =
                 new Date(normalizedValue);
-
-            /*
-               Fallback por seguridad.
-            */
 
             if (Number.isNaN(date.getTime())) {
                 return new Date(timestamp);
@@ -816,11 +921,6 @@
                 "message"
             );
 
-            /*
-               Diferenciamos visualmente los
-               mensajes enviados por el usuario.
-            */
-
             if (
                 message.username === username
             ) {
@@ -828,12 +928,8 @@
             }
 
 
-            /* NOMBRE + ESTRELLAS */
-
             const nameWrap =
-                document.createElement(
-                    "div"
-                );
+                document.createElement("div");
 
             nameWrap.classList.add(
                 "name-wrap"
@@ -841,21 +937,14 @@
 
 
             const starLeft =
-                document.createElement(
-                    "span"
-                );
+                document.createElement("span");
 
-            starLeft.classList.add(
-                "star"
-            );
-
+            starLeft.classList.add("star");
             starLeft.textContent = "✦";
 
 
             const starSmall =
-                document.createElement(
-                    "span"
-                );
+                document.createElement("span");
 
             starSmall.classList.add(
                 "star",
@@ -866,72 +955,41 @@
 
 
             const name =
-                document.createElement(
-                    "div"
-                );
+                document.createElement("div");
 
-            name.classList.add(
-                "name"
-            );
+            name.classList.add("name");
 
             name.textContent =
                 message.username;
 
 
             const starRight =
-                document.createElement(
-                    "span"
-                );
+                document.createElement("span");
 
-            starRight.classList.add(
-                "star"
-            );
+            starRight.classList.add("star");
 
             starRight.textContent = "✦";
 
 
-            nameWrap.appendChild(
-                starLeft
-            );
+            nameWrap.appendChild(starLeft);
+            nameWrap.appendChild(starSmall);
+            nameWrap.appendChild(name);
+            nameWrap.appendChild(starRight);
 
-            nameWrap.appendChild(
-                starSmall
-            );
-
-            nameWrap.appendChild(
-                name
-            );
-
-            nameWrap.appendChild(
-                starRight
-            );
-
-
-            /* TEXTO */
 
             const text =
-                document.createElement(
-                    "div"
-                );
+                document.createElement("div");
 
-            text.classList.add(
-                "text"
-            );
+            text.classList.add("text");
 
             text.textContent =
                 message.message;
 
 
-            /* HORA */
-
             const time =
-                document.createElement(
-                    "span"
-                );
+                document.createElement("span");
 
-            time.classList.add(
-                "time"
-            );
+            time.classList.add("time");
 
             time.textContent =
                 formatMessageTime(
@@ -939,23 +997,11 @@
                 );
 
 
-            element.appendChild(
-                nameWrap
-            );
+            element.appendChild(nameWrap);
+            element.appendChild(text);
+            element.appendChild(time);
 
-            element.appendChild(
-                text
-            );
-
-            element.appendChild(
-                time
-            );
-
-
-            messages.appendChild(
-                element
-            );
-
+            messages.appendChild(element);
 
             scrollToBottom();
         }
@@ -982,9 +1028,7 @@
                 const {
                     error
                 } = await supabaseClient
-
                     .from("messages")
-
                     .insert({
                         chat_id: chatId,
                         username: username,
@@ -1015,17 +1059,15 @@
 
 
         /* =====================================
-           TIEMPO REAL
+           TIEMPO REAL - MENSAJES
         ====================================== */
 
         function subscribeToMessages() {
 
             supabaseClient
-
                 .channel(
                     "chat-" + chatId
                 )
-
                 .on(
                     "postgres_changes",
                     {
@@ -1035,7 +1077,6 @@
                         filter:
                             "chat_id=eq." + chatId
                     },
-
                     function(payload) {
 
                         addMessageToScreen(
@@ -1044,9 +1085,714 @@
 
                     }
                 )
-
                 .subscribe();
         }
+
+
+        /* =====================================
+           WEBRTC - CANAL DE SEÑALIZACIÓN
+
+           No se guarda audio en Supabase.
+           Supabase Realtime solamente pasa:
+             - presencia
+             - offer
+             - answer
+             - ICE candidates
+
+           El audio va directamente entre
+           los navegadores mediante WebRTC.
+        ====================================== */
+
+        async function setupAudioChannel() {
+
+            audioChannel =
+                supabaseClient.channel(
+                    "audio-" + chatId,
+                    {
+                        config: {
+                            presence: {
+                                key: crypto.randomUUID()
+                            }
+                        }
+                    }
+                );
+
+
+            audioChannel
+                .on(
+                    "presence",
+                    {
+                        event: "sync"
+                    },
+                    handlePresenceSync
+                )
+                .on(
+                    "presence",
+                    {
+                        event: "join"
+                    },
+                    handlePresenceJoin
+                )
+                .on(
+                    "broadcast",
+                    {
+                        event: "webrtc"
+                    },
+                    async ({ payload }) => {
+
+                        if (!payload) return;
+
+                        await handleWebRTCSignal(payload);
+                    }
+                );
+
+
+            const status =
+                await audioChannel.subscribe(
+                    async (status) => {
+
+                        if (status === "SUBSCRIBED") {
+
+                            await audioChannel.track({
+                                username: username,
+                                joinedAt: Date.now()
+                            });
+
+                            setAudioStatus(
+                                "Audio listo · micrófono apagado"
+                            );
+                        }
+                    }
+                );
+
+
+            if (status !== "SUBSCRIBED") {
+                console.warn(
+                    "No se pudo conectar el canal de audio:",
+                    status
+                );
+            }
+        }
+
+
+        function getPresenceCount() {
+
+            if (!audioChannel) return 0;
+
+            const state =
+                audioChannel.presenceState();
+
+            return Object.keys(state).length;
+        }
+
+
+        async function handlePresenceSync() {
+
+            const count =
+                getPresenceCount();
+
+            remotePeerPresent =
+                count > 1;
+
+            if (
+                remotePeerPresent &&
+                audioStarted
+            ) {
+                await ensurePeerConnection();
+
+                if (!makingOffer) {
+                    await createOffer();
+                }
+            }
+        }
+
+
+        async function handlePresenceJoin() {
+
+            remotePeerPresent = true;
+
+            /*
+             * Si ya tenemos el micrófono activo,
+             * intentamos iniciar la conexión.
+             */
+            if (audioStarted) {
+
+                await ensurePeerConnection();
+
+                if (!makingOffer) {
+                    await createOffer();
+                }
+            }
+        }
+
+
+        /* =====================================
+           CREAR CONEXIÓN PEER
+        ====================================== */
+
+        async function ensurePeerConnection() {
+
+            if (peerConnection) {
+                return peerConnection;
+            }
+
+
+            peerConnection =
+                new RTCPeerConnection(
+                    rtcConfig
+                );
+
+
+            peerConnection.onicecandidate =
+                async (event) => {
+
+                    if (!event.candidate) {
+                        return;
+                    }
+
+                    await sendSignal({
+                        type: "candidate",
+                        candidate: event.candidate
+                    });
+                };
+
+
+            peerConnection.ontrack =
+                async (event) => {
+
+                    if (
+                        event.streams &&
+                        event.streams[0]
+                    ) {
+
+                        remoteAudio.srcObject =
+                            event.streams[0];
+
+                    } else {
+
+                        const stream =
+                            new MediaStream([
+                                event.track
+                            ]);
+
+                        remoteAudio.srcObject =
+                            stream;
+                    }
+
+
+                    try {
+                        await remoteAudio.play();
+                    } catch (error) {
+                        console.warn(
+                            "El navegador bloqueó el audio automático:",
+                            error
+                        );
+                    }
+
+                    setAudioStatus(
+                        "🔊 Audio de la otra persona conectado",
+                        true
+                    );
+                };
+
+
+            peerConnection.onconnectionstatechange =
+                () => {
+
+                    const state =
+                        peerConnection.connectionState;
+
+                    if (state === "connected") {
+
+                        setAudioStatus(
+                            audioStarted
+                                ? "🎤 Micrófono activo · 🔊 audio conectado"
+                                : "🔊 Audio conectado · micrófono apagado",
+                            audioStarted
+                        );
+
+                    } else if (
+                        state === "disconnected" ||
+                        state === "failed"
+                    ) {
+
+                        setAudioStatus(
+                            "Reconectando audio..."
+                        );
+                    }
+                };
+
+
+            peerConnection.onnegotiationneeded =
+                async () => {
+
+                    if (
+                        !audioStarted ||
+                        makingOffer
+                    ) {
+                        return;
+                    }
+
+                    try {
+                        await createOffer();
+                    } catch (error) {
+                        console.error(
+                            "Error creando oferta:",
+                            error
+                        );
+                    }
+                };
+
+
+            /*
+             * IMPORTANTE:
+             * El track local siempre puede existir,
+             * pero empieza muted/desactivado.
+             */
+            if (localStream) {
+
+                localStream
+                    .getTracks()
+                    .forEach(track => {
+
+                        peerConnection.addTrack(
+                            track,
+                            localStream
+                        );
+
+                    });
+
+            }
+
+
+            return peerConnection;
+        }
+
+
+        /* =====================================
+           OBTENER MICRÓFONO
+
+           Solo se pide permiso cuando el usuario
+           pulsa el botón.
+        ====================================== */
+
+        async function getLocalMicrophone() {
+
+            if (localStream) {
+                return localStream;
+            }
+
+
+            try {
+
+                localStream =
+                    await navigator.mediaDevices
+                        .getUserMedia({
+                            audio: {
+                                echoCancellation: true,
+                                noiseSuppression: true,
+                                autoGainControl: true
+                            },
+                            video: false
+                        });
+
+
+                localAudioTrack =
+                    localStream.getAudioTracks()[0];
+
+                /*
+                 * Empieza apagado aunque el navegador
+                 * haya concedido permiso.
+                 */
+                localAudioTrack.enabled =
+                    false;
+
+
+                return localStream;
+
+            } catch (error) {
+
+                console.error(
+                    "No se pudo acceder al micrófono:",
+                    error
+                );
+
+                if (
+                    error.name === "NotAllowedError"
+                ) {
+
+                    alert(
+                        "Necesitas permitir el uso del micrófono en el navegador para activar el audio."
+                    );
+
+                } else {
+
+                    alert(
+                        "No se pudo acceder al micrófono."
+                    );
+                }
+
+                return null;
+            }
+        }
+
+
+        /* =====================================
+           ACTIVAR / DESACTIVAR MICRÓFONO
+        ====================================== */
+
+        micButton.addEventListener(
+            "click",
+            async function() {
+
+                if (!audioChannel) {
+                    setAudioStatus(
+                        "El audio todavía está conectando..."
+                    );
+                    return;
+                }
+
+
+                /*
+                 * Primera pulsación:
+                 * pide permiso al navegador.
+                 */
+                if (!localStream) {
+
+                    micButton.classList.add(
+                        "waiting"
+                    );
+
+                    const stream =
+                        await getLocalMicrophone();
+
+                    micButton.classList.remove(
+                        "waiting"
+                    );
+
+                    if (!stream) {
+                        return;
+                    }
+
+
+                    await ensurePeerConnection();
+
+                    /*
+                     * Aseguramos que el track empiece
+                     * apagado hasta terminar la preparación.
+                     */
+                    if (localAudioTrack) {
+                        localAudioTrack.enabled =
+                            false;
+                    }
+                }
+
+
+                if (!localAudioTrack) {
+                    return;
+                }
+
+
+                localAudioTrack.enabled =
+                    !localAudioTrack.enabled;
+
+
+                audioStarted =
+                    localAudioTrack.enabled;
+
+
+                if (audioStarted) {
+
+                    micButton.classList.add("active");
+
+                    micButton.textContent = "🎙️";
+
+                    micButton.setAttribute(
+                        "aria-label",
+                        "Apagar micrófono"
+                    );
+
+                    micButton.title =
+                        "Apagar micrófono";
+
+
+                    setAudioStatus(
+                        remotePeerPresent
+                            ? "🎙️ Micrófono activo · 🔊 audio conectado"
+                            : "🎙️ Micrófono activo · esperando a la otra persona",
+                        true
+                    );
+
+
+                    /*
+                     * Si la otra persona ya está en el chat,
+                     * comenzamos la negociación.
+                     */
+                    if (remotePeerPresent) {
+
+                        await ensurePeerConnection();
+
+                        if (!makingOffer) {
+                            await createOffer();
+                        }
+
+                    }
+
+                } else {
+
+                    micButton.classList.remove("active");
+
+                    micButton.textContent = "📞";
+
+                    micButton.setAttribute(
+                        "aria-label",
+                        "Activar micrófono"
+                    );
+
+                    micButton.title =
+                        "Activar micrófono";
+
+
+                    setAudioStatus(
+                        "🔇 Micrófono apagado · audio listo"
+                    );
+                }
+            }
+        );
+
+
+        /* =====================================
+           CREAR OFFER
+        ====================================== */
+
+        async function createOffer() {
+
+            if (!peerConnection) {
+                return;
+            }
+
+            if (!remotePeerPresent) {
+                return;
+            }
+
+
+            if (makingOffer) {
+                return;
+            }
+
+
+            try {
+
+                makingOffer = true;
+
+                const offer =
+                    await peerConnection.createOffer();
+
+                await peerConnection.setLocalDescription(
+                    offer
+                );
+
+                await sendSignal({
+                    type: "offer",
+                    description:
+                        peerConnection.localDescription
+                });
+
+            } catch (error) {
+
+                console.error(
+                    "Error creando offer:",
+                    error
+                );
+
+            } finally {
+
+                makingOffer = false;
+            }
+        }
+
+
+        /* =====================================
+           ENVIAR SEÑAL WEBRTC
+        ====================================== */
+
+        async function sendSignal(data) {
+
+            if (!audioChannel) {
+                return;
+            }
+
+            try {
+
+                await audioChannel.send({
+                    type: "broadcast",
+                    event: "webrtc",
+                    payload: {
+                        ...data
+                    }
+                });
+
+            } catch (error) {
+
+                console.error(
+                    "Error enviando señal WebRTC:",
+                    error
+                );
+            }
+        }
+
+
+        /* =====================================
+           RECIBIR SEÑAL WEBRTC
+        ====================================== */
+
+        async function handleWebRTCSignal(payload) {
+
+            if (!payload || !audioChannel) {
+                return;
+            }
+
+
+            /*
+             * No necesitamos identificarnos por nombre:
+             * Realtime broadcast entrega el evento a
+             * los otros clientes del canal, no al emisor.
+             */
+
+            try {
+
+                if (
+                    payload.type === "offer"
+                ) {
+
+                    /*
+                     * La persona que recibe una offer
+                     * prepara su conexión.
+                     */
+                    await ensurePeerConnection();
+
+
+                    await peerConnection.setRemoteDescription(
+                        new RTCSessionDescription(
+                            payload.description
+                        )
+                    );
+
+
+                    const answer =
+                        await peerConnection.createAnswer();
+
+
+                    await peerConnection.setLocalDescription(
+                        answer
+                    );
+
+
+                    await sendSignal({
+                        type: "answer",
+                        description:
+                            peerConnection.localDescription
+                    });
+
+
+                    if (
+                        audioStarted &&
+                        localAudioTrack
+                    ) {
+                        localAudioTrack.enabled =
+                            true;
+                    }
+
+
+                } else if (
+                    payload.type === "answer"
+                ) {
+
+                    if (!peerConnection) {
+                        return;
+                    }
+
+
+                    await peerConnection.setRemoteDescription(
+                        new RTCSessionDescription(
+                            payload.description
+                        )
+                    );
+
+
+                } else if (
+                    payload.type === "candidate"
+                ) {
+
+                    if (!peerConnection) {
+                        return;
+                    }
+
+
+                    if (
+                        payload.candidate
+                    ) {
+
+                        try {
+
+                            await peerConnection.addIceCandidate(
+                                new RTCIceCandidate(
+                                    payload.candidate
+                                )
+                            );
+
+                        } catch (error) {
+
+                            /*
+                             * Algunos candidatos pueden llegar
+                             * antes de la descripción remota.
+                             */
+                            console.warn(
+                                "No se pudo añadir ICE candidate:",
+                                error
+                            );
+                        }
+                    }
+                }
+
+            } catch (error) {
+
+                console.error(
+                    "Error procesando señal WebRTC:",
+                    error
+                );
+            }
+        }
+
+
+        /* =====================================
+           LIMPIEZA AL SALIR
+        ====================================== */
+
+        window.addEventListener(
+            "beforeunload",
+            () => {
+
+                if (localStream) {
+
+                    localStream
+                        .getTracks()
+                        .forEach(track => {
+                            track.stop();
+                        });
+                }
+
+
+                if (peerConnection) {
+                    peerConnection.close();
+                }
+
+
+                if (audioChannel) {
+                    audioChannel.unsubscribe();
+                }
+            }
+        );
 
 
         /* =====================================
@@ -1062,5 +1808,11 @@
     </script>
 
 </body>
-
 </html>
+'''
+
+path = Path("/mnt/data/mi_otra_mitad_audio.html")
+path.write_text(html, encoding="utf-8")
+
+print(f"Archivo creado: {path}")
+print(f"Líneas: {len(html.splitlines())}")
