@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="es">
 
@@ -28,7 +29,6 @@
             --text-dark: #08203d;
             --white-blue: #eaf8ff;
             --call-green: #42d392;
-            --call-red: #ff647c;
         }
 
         body {
@@ -52,10 +52,12 @@
         }
 
         body::after {
-            content: "✦     ·   ✧        ·       ⋆   ·          ✦\A"
-                   "   ·        ✦       ·    ⋆       ✧       ·\A"
-                   "✧       ·      ⋆         ·       ✦      ·\A"
-                   "     ⋆       ·       ✧       ·       ⋆";
+            content:
+                "✦     ·   ✧        ·       ⋆   ·          ✦\A"
+                "   ·        ✦       ·    ⋆       ✧       ·\A"
+                "✧       ·      ⋆         ·       ✦      ·\A"
+                "     ⋆       ·       ✧       ·       ⋆";
+
             white-space: pre;
             position: fixed;
             inset: 0;
@@ -70,7 +72,7 @@
         }
 
         /* =========================
-           PANTALLA DE ENTRADA
+           LOGIN
         ========================== */
 
         #login-screen {
@@ -80,6 +82,7 @@
             justify-content: center;
             align-items: center;
             padding: 20px;
+
             background:
                 radial-gradient(circle at 50% 0%, rgba(64, 145, 235, .22), transparent 38%),
                 linear-gradient(145deg, #061329, #091c3b 55%, #041024);
@@ -92,9 +95,11 @@
             border: 1px solid rgba(142, 216, 255, .22);
             border-radius: 24px;
             text-align: center;
+
             box-shadow:
                 0 25px 80px rgba(0, 0, 0, .45),
                 0 0 45px rgba(61, 142, 234, .10);
+
             backdrop-filter: blur(12px);
         }
 
@@ -125,7 +130,6 @@
             outline: none;
             font-size: 16px;
             margin-bottom: 15px;
-            transition: .2s;
         }
 
         #username:focus {
@@ -149,7 +153,6 @@
 
         #enter-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 12px 28px rgba(61, 142, 234, .35);
         }
 
         /* =========================
@@ -169,8 +172,10 @@
             align-items: center;
             justify-content: space-between;
             padding: 0 20px;
+
             background: rgba(5, 19, 42, .94);
             border-bottom: 1px solid rgba(142, 216, 255, .15);
+
             box-shadow: 0 5px 25px rgba(0, 0, 0, .18);
             backdrop-filter: blur(12px);
         }
@@ -184,12 +189,15 @@
         .chat-icon {
             width: 42px;
             height: 42px;
+
             display: flex;
             align-items: center;
             justify-content: center;
+
             background: linear-gradient(145deg, #164f8d, #237bc2);
             border: 1px solid rgba(142, 216, 255, .25);
             border-radius: 50%;
+
             box-shadow: 0 0 20px rgba(61, 142, 234, .20);
         }
 
@@ -215,7 +223,7 @@
         }
 
         /* =========================
-           CONTROLES DE AUDIO
+           BOTÓN DE LLAMADA
         ========================== */
 
         .header-actions {
@@ -227,13 +235,18 @@
         #mic-button {
             width: 46px;
             height: 46px;
+
             border: 1px solid rgba(142, 216, 255, .22);
             border-radius: 50%;
+
             background: rgba(19, 52, 91, .85);
             color: white;
+
             font-size: 21px;
             cursor: pointer;
+
             transition: .2s;
+
             box-shadow: 0 5px 18px rgba(0, 0, 0, .18);
         }
 
@@ -245,26 +258,48 @@
         #mic-button.active {
             background: linear-gradient(145deg, #36b978, #42d392);
             border-color: rgba(190, 255, 224, .65);
-            box-shadow: 0 0 22px rgba(66, 211, 146, .30);
+
+            box-shadow:
+                0 0 22px rgba(66, 211, 146, .30);
         }
 
         #mic-button.waiting {
             animation: pulseMic 1.5s infinite;
         }
 
+        @keyframes pulseMic {
+
+            0%,
+            100% {
+                box-shadow: 0 0 0 0 rgba(66, 211, 146, .35);
+            }
+
+            50% {
+                box-shadow: 0 0 0 9px rgba(66, 211, 146, 0);
+            }
+        }
+
         #audio-status {
             position: fixed;
             right: 18px;
             top: 80px;
+
             z-index: 20;
+
             display: none;
+
             max-width: calc(100vw - 36px);
+
             padding: 8px 12px;
+
             border-radius: 12px;
+
             background: rgba(7, 25, 52, .92);
             border: 1px solid rgba(142, 216, 255, .16);
+
             color: #a9c8e5;
             font-size: 11px;
+
             backdrop-filter: blur(10px);
         }
 
@@ -281,30 +316,27 @@
             display: none;
         }
 
-        @keyframes pulseMic {
-            0%, 100% {
-                box-shadow: 0 0 0 0 rgba(66, 211, 146, .35);
-            }
-            50% {
-                box-shadow: 0 0 0 9px rgba(66, 211, 146, 0);
-            }
-        }
-
         /* =========================
            MENSAJES
         ========================== */
 
         #messages {
             flex: 1;
+
             overflow-y: auto;
+
             padding: 24px 20px;
+
             display: flex;
             flex-direction: column;
+
             gap: 13px;
+
             background:
                 radial-gradient(circle at 20% 15%, rgba(55, 130, 210, .08), transparent 25%),
                 radial-gradient(circle at 80% 80%, rgba(75, 178, 240, .07), transparent 28%),
                 #06152d;
+
             scroll-behavior: smooth;
         }
 
@@ -323,37 +355,53 @@
 
         .message {
             max-width: 75%;
+
             padding: 11px 15px;
+
             border-radius: 17px 17px 17px 5px;
-            background: linear-gradient(145deg, var(--bubble), #83d0f7);
+
+            background:
+                linear-gradient(145deg, var(--bubble), #83d0f7);
+
             color: var(--text-dark);
+
             align-self: flex-start;
+
             border: 1px solid rgba(215, 246, 255, .55);
+
             box-shadow:
                 0 7px 20px rgba(0, 0, 0, .18),
                 0 0 18px rgba(117, 201, 245, .08);
+
             animation: messageIn .2s ease-out;
         }
 
         .message.mine {
             align-self: flex-end;
+
             border-radius: 17px 17px 5px 17px;
-            background: linear-gradient(145deg, #b3e6ff, #83d1fa);
+
+            background:
+                linear-gradient(145deg, #b3e6ff, #83d1fa);
         }
 
         .name-wrap {
             display: flex;
             align-items: center;
+
             gap: 7px;
+
             margin-bottom: 4px;
+
             min-height: 18px;
         }
 
         .star {
             color: #fff8bd;
             font-size: 11px;
-            text-shadow: 0 0 6px rgba(255, 248, 189, .9);
-            line-height: 1;
+
+            text-shadow:
+                0 0 6px rgba(255, 248, 189, .9);
         }
 
         .star.small {
@@ -370,27 +418,44 @@
         .message .text {
             font-size: 15px;
             line-height: 1.45;
+
             white-space: pre-wrap;
             word-break: break-word;
         }
 
         .message .time {
             display: block;
+
             text-align: right;
+
             font-size: 10px;
+
             color: #326080;
+
             margin-top: 6px;
         }
 
+        /* =========================
+           MENSAJE DEL SISTEMA
+        ========================== */
+
         .system-message {
             align-self: center;
+
             max-width: 90%;
+
             text-align: center;
+
             background: rgba(20, 54, 91, .45);
+
             color: #86b9dc;
+
             border: 1px solid rgba(134, 185, 220, .10);
+
             padding: 9px 14px;
+
             border-radius: 14px;
+
             box-shadow: none;
         }
 
@@ -399,96 +464,22 @@
         }
 
         /* =========================
-           CAJA DE MENSAJE
+           RESPUESTAS
         ========================== */
-
-        .message-area {
-            display: flex;
-            gap: 10px;
-            padding: 13px 15px;
-            background: rgba(7, 25, 52, .97);
-            border-top: 1px solid rgba(142, 216, 255, .15);
-            box-shadow: 0 -7px 25px rgba(0, 0, 0, .16);
-        }
-
-        #message-input {
-            flex: 1;
-            padding: 13px 16px;
-            background: #2f72b8;
-            color: white;
-            border: 1px solid #5599d5;
-            border-radius: 13px;
-            outline: none;
-            font-size: 15px;
-            box-shadow: inset 0 2px 8px rgba(0, 0, 0, .12);
-            transition: .2s;
-        }
-
-        #message-input::placeholder {
-            color: rgba(235, 249, 255, .72);
-        }
-
-        #message-input:focus {
-            background: #357ec6;
-            border-color: #8ed8ff;
-            box-shadow:
-                0 0 0 3px rgba(142, 216, 255, .10),
-                inset 0 2px 8px rgba(0, 0, 0, .12);
-        }
-
-        #send-button {
-            width: 52px;
-            border: none;
-            border-radius: 13px;
-            background: linear-gradient(145deg, #55b8f0, #3285d0);
-            color: white;
-            font-size: 21px;
-            cursor: pointer;
-            transition: .2s;
-            box-shadow: 0 7px 18px rgba(50, 133, 208, .25);
-        }
-
-        #send-button:hover {
-            transform: scale(1.05) rotate(-2deg);
-            box-shadow: 0 10px 23px rgba(50, 133, 208, .35);
-        }
-
-        @keyframes messageIn {
-            from {
-                opacity: 0;
-                transform: translateY(5px) scale(.98);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-
-
-        /* =========================
-           IMÁGENES Y RESPUESTAS
-        ========================== */
-
-        .message-image {
-            display: block;
-            width: min(280px, 100%);
-            max-height: 360px;
-            object-fit: cover;
-            border-radius: 13px;
-            margin-top: 7px;
-            cursor: pointer;
-            border: 1px solid rgba(255,255,255,.35);
-            box-shadow: 0 5px 18px rgba(0,0,0,.18);
-        }
 
         .reply-box {
             display: none;
+
             align-items: center;
+
             gap: 10px;
+
             padding: 8px 12px;
+
             background: rgba(13, 35, 69, .96);
-            border-top: 1px solid rgba(142,216,255,.12);
+
+            border-top:
+                1px solid rgba(142, 216, 255, .12);
         }
 
         .reply-box.show {
@@ -498,7 +489,10 @@
         .reply-line {
             flex: 1;
             min-width: 0;
-            border-left: 3px solid var(--blue-light);
+
+            border-left:
+                3px solid var(--blue-light);
+
             padding-left: 9px;
         }
 
@@ -508,58 +502,90 @@
             margin-bottom: 2px;
         }
 
+        .reply-label strong {
+            color: #bde9ff;
+        }
+
         .reply-preview {
             color: #cceaff;
+
             font-size: 12px;
+
             white-space: nowrap;
+
             overflow: hidden;
+
             text-overflow: ellipsis;
         }
 
         #cancel-reply {
             border: none;
+
             background: transparent;
+
             color: #9fc5e4;
+
             font-size: 20px;
+
             cursor: pointer;
+
             padding: 4px 7px;
         }
 
         .message-reply {
             margin-bottom: 8px;
+
             padding: 7px 9px;
-            border-left: 3px solid #3d8eea;
-            background: rgba(8, 32, 61, .10);
+
+            border-left:
+                3px solid #3d8eea;
+
+            background:
+                rgba(8, 32, 61, .10);
+
             border-radius: 7px;
+
             font-size: 11px;
         }
 
         .message-reply strong {
             display: block;
+
             color: #17466e;
+
             margin-bottom: 2px;
         }
 
         .message-reply span {
             display: block;
+
             color: #326080;
+
             white-space: nowrap;
+
             overflow: hidden;
+
             text-overflow: ellipsis;
         }
 
         .message-tools {
             display: flex;
             justify-content: flex-end;
+
             margin-top: 5px;
         }
 
         .reply-button {
             border: none;
+
             background: transparent;
+
             color: #326080;
+
             font-size: 11px;
+
             cursor: pointer;
+
             padding: 2px 4px;
         }
 
@@ -568,42 +594,141 @@
             text-decoration: underline;
         }
 
-        #image-button {
-            width: 48px;
-            border: none;
-            border-radius: 13px;
-            background: linear-gradient(145deg, #245f9b, #317dbb);
+        /* =========================
+           CAJA DE MENSAJE
+        ========================== */
+
+        .message-area {
+            display: flex;
+
+            gap: 10px;
+
+            padding: 13px 15px;
+
+            background: rgba(7, 25, 52, .97);
+
+            border-top:
+                1px solid rgba(142, 216, 255, .15);
+
+            box-shadow:
+                0 -7px 25px rgba(0, 0, 0, .16);
+        }
+
+        #message-input {
+            flex: 1;
+
+            padding: 13px 16px;
+
+            background: #2f72b8;
+
             color: white;
-            font-size: 20px;
+
+            border: 1px solid #5599d5;
+
+            border-radius: 13px;
+
+            outline: none;
+
+            font-size: 15px;
+
+            box-shadow:
+                inset 0 2px 8px rgba(0, 0, 0, .12);
+        }
+
+        #message-input::placeholder {
+            color: rgba(235, 249, 255, .72);
+        }
+
+        #message-input:focus {
+            background: #357ec6;
+
+            border-color: #8ed8ff;
+
+            box-shadow:
+                0 0 0 3px rgba(142, 216, 255, .10),
+                inset 0 2px 8px rgba(0, 0, 0, .12);
+        }
+
+        #send-button {
+            width: 52px;
+
+            border: none;
+
+            border-radius: 13px;
+
+            background:
+                linear-gradient(145deg, #55b8f0, #3285d0);
+
+            color: white;
+
+            font-size: 21px;
+
             cursor: pointer;
+
             transition: .2s;
+
+            box-shadow:
+                0 7px 18px rgba(50, 133, 208, .25);
         }
 
-        #image-button:hover {
-            transform: scale(1.04);
+        #send-button:hover {
+            transform:
+                scale(1.05)
+                rotate(-2deg);
         }
 
-        #image-input {
-            display: none;
+        @keyframes messageIn {
+
+            from {
+                opacity: 0;
+                transform:
+                    translateY(5px)
+                    scale(.98);
+            }
+
+            to {
+                opacity: 1;
+                transform:
+                    translateY(0)
+                    scale(1);
+            }
         }
 
-        #upload-status {
+        /* =========================
+           NOTIFICACIONES
+        ========================== */
+
+        #notification-status {
             position: fixed;
+
             left: 50%;
-            bottom: 83px;
+            bottom: 82px;
+
             transform: translateX(-50%);
+
             display: none;
+
             z-index: 30;
+
             padding: 8px 13px;
+
             border-radius: 12px;
-            background: rgba(7,25,52,.95);
-            border: 1px solid rgba(142,216,255,.18);
+
+            background:
+                rgba(7, 25, 52, .95);
+
+            border:
+                1px solid rgba(142, 216, 255, .18);
+
             color: #bfe7ff;
+
             font-size: 12px;
-            box-shadow: 0 8px 25px rgba(0,0,0,.25);
+
+            box-shadow:
+                0 8px 25px rgba(0, 0, 0, .25);
         }
 
-        #upload-status.show {
+        #notification-status.show {
             display: block;
         }
 
@@ -612,6 +737,7 @@
         ========================== */
 
         @media (max-width: 600px) {
+
             .login-box {
                 padding: 30px 22px;
             }
@@ -651,16 +777,20 @@
 <body>
 
     <!-- =========================
-         ENTRADA
+         LOGIN
     ========================== -->
 
     <section id="login-screen">
 
         <div class="login-box">
 
-            <div class="login-icon">🌙</div>
+            <div class="login-icon">
+                🌙
+            </div>
 
-            <h1>Mi otra mitad</h1>
+            <h1>
+                Mi otra mitad
+            </h1>
 
             <p>
                 Elige el nombre que aparecerá
@@ -712,39 +842,65 @@
 
             </div>
 
+
             <div class="header-actions">
 
                 <div id="current-user"></div>
 
-                <!-- Micrófono: la conexión de audio permanece disponible,
-                     pero el micrófono empieza apagado. -->
+                <!--
+                    BOTÓN DE LLAMADA / MICRÓFONO
+
+                    Empieza apagado.
+                    Al tocarlo solicita permiso
+                    para utilizar el micrófono.
+                -->
+
                 <button
                     id="mic-button"
                     type="button"
                     aria-label="Activar micrófono"
                     title="Activar micrófono"
-                >📞</button>
+                >
+                    📞
+                </button>
 
             </div>
 
         </header>
 
+
         <div id="audio-status"></div>
 
-        <!-- Elemento de audio remoto -->
-        <audio id="remote-audio" autoplay playsinline></audio>
+
+        <audio
+            id="remote-audio"
+            autoplay
+            playsinline
+        ></audio>
 
 
-        <!-- MENSAJES -->
+        <!-- =========================
+             MENSAJES
+        ========================== -->
 
         <section id="messages">
 
             <div class="message system-message">
 
                 <div class="name-wrap">
-                    <span class="star">✦</span>
-                    <div class="name">💬 Sistema</div>
-                    <span class="star">✦</span>
+
+                    <span class="star">
+                        ✦
+                    </span>
+
+                    <div class="name">
+                        💬 Sistema
+                    </div>
+
+                    <span class="star">
+                        ✦
+                    </span>
+
                 </div>
 
                 <div class="text">
@@ -756,35 +912,52 @@
         </section>
 
 
-        <!-- RESPONDER -->
+        <!-- =========================
+             RESPONDER
+        ========================== -->
 
-        <div class="reply-box" id="reply-box">
+        <div
+            class="reply-box"
+            id="reply-box"
+        >
+
             <div class="reply-line">
-                <div class="reply-label">Respondiendo a <strong id="reply-name"></strong></div>
-                <div class="reply-preview" id="reply-preview"></div>
+
+                <div class="reply-label">
+
+                    Respondiendo a
+                    <strong id="reply-name"></strong>
+
+                </div>
+
+                <div
+                    class="reply-preview"
+                    id="reply-preview"
+                ></div>
+
             </div>
-            <button type="button" id="cancel-reply" aria-label="Cancelar respuesta">×</button>
+
+
+            <button
+                type="button"
+                id="cancel-reply"
+                aria-label="Cancelar respuesta"
+                title="Cancelar respuesta"
+            >
+                ×
+            </button>
+
         </div>
 
-        <!-- ESCRIBIR -->
+
+        <!-- =========================
+             ESCRIBIR
+        ========================== -->
 
         <form
             class="message-area"
             id="message-form"
         >
-
-            <button
-                type="button"
-                id="image-button"
-                aria-label="Enviar imagen"
-                title="Enviar imagen"
-            >🖼️</button>
-
-            <input
-                type="file"
-                id="image-input"
-                accept="image/*"
-            >
 
             <input
                 type="text"
@@ -803,7 +976,8 @@
 
         </form>
 
-        <div id="upload-status"></div>
+
+        <div id="notification-status"></div>
 
     </main>
 
@@ -815,7 +989,7 @@
     <script>
 
         /* =====================================
-           CONFIGURACIÓN DE SUPABASE
+           SUPABASE
         ====================================== */
 
         const SUPABASE_URL =
@@ -868,12 +1042,6 @@
         const remoteAudio =
             document.getElementById("remote-audio");
 
-        const imageButton =
-            document.getElementById("image-button");
-
-        const imageInput =
-            document.getElementById("image-input");
-
         const replyBox =
             document.getElementById("reply-box");
 
@@ -886,19 +1054,23 @@
         const cancelReply =
             document.getElementById("cancel-reply");
 
-        const uploadStatus =
-            document.getElementById("upload-status");
-
-        let replyTarget = null;
-        let notificationTitle = document.title;
-        let titleFlashTimer = null;
+        const notificationStatus =
+            document.getElementById("notification-status");
 
 
         /* =====================================
-           DATOS DEL CHAT
+           VARIABLES
         ====================================== */
 
         let username = "";
+
+        let replyTarget = null;
+
+        let notificationTitle =
+            document.title;
+
+        let titleFlashTimer = null;
+
 
         const params =
             new URLSearchParams(
@@ -910,50 +1082,92 @@
 
 
         /* =====================================
-           AUDIO WEBRTC
-           Una conexión de audio por chat.
-
-           Supabase Realtime se utiliza para
-           intercambiar la señalización.
+           AUDIO / WEBRTC
         ====================================== */
 
         let audioChannel = null;
+
         let peerConnection = null;
+
         let localStream = null;
+
         let localAudioTrack = null;
 
         let audioStarted = false;
+
         let remotePeerPresent = false;
+
         let makingOffer = false;
-        let ignoreOffer = false;
+
 
         const rtcConfig = {
+
             iceServers: [
-                { urls: "stun:stun.l.google.com:19302" },
-                { urls: "stun:stun.cloudflare.com:3478" }
+
+                {
+                    urls:
+                        "stun:stun.l.google.com:19302"
+                },
+
+                {
+                    urls:
+                        "stun:stun.cloudflare.com:3478"
+                }
+
             ]
+
         };
 
 
-        function setAudioStatus(text, active = false) {
-            audioStatus.textContent = text;
-            audioStatus.classList.toggle("show", !!text);
-            audioStatus.classList.toggle("active", active);
+        /* =====================================
+           ESTADO AUDIO
+        ====================================== */
+
+        function setAudioStatus(
+            text,
+            active = false
+        ) {
+
+            audioStatus.textContent =
+                text;
+
+            audioStatus.classList.toggle(
+                "show",
+                !!text
+            );
+
+            audioStatus.classList.toggle(
+                "active",
+                active
+            );
 
             if (text) {
-                clearTimeout(setAudioStatus.hideTimer);
 
-                setAudioStatus.hideTimer = setTimeout(() => {
-                    if (!audioStarted) {
-                        audioStatus.classList.remove("show");
-                    }
-                }, 3500);
+                clearTimeout(
+                    setAudioStatus.hideTimer
+                );
+
+                setAudioStatus.hideTimer =
+                    setTimeout(
+                        () => {
+
+                            if (!audioStarted) {
+
+                                audioStatus.classList.remove(
+                                    "show"
+                                );
+
+                            }
+
+                        },
+                        3500
+                    );
             }
         }
 
 
         /* =====================================
-           ENTRAR
+           ENTRAR AL CHAT
         ====================================== */
 
         async function enterChat() {
@@ -961,31 +1175,43 @@
             const name =
                 usernameInput.value.trim();
 
-            if (name === "") {
+            if (!name) {
+
                 usernameInput.focus();
+
                 return;
             }
 
+
             username = name;
 
+
             await requestNotificationPermission();
+
 
             currentUser.textContent =
                 "👤 " + username;
 
+
             loginScreen.style.display =
                 "none";
+
 
             chatScreen.style.display =
                 "flex";
 
+
             await loadMessages();
+
 
             subscribeToMessages();
 
+
             setupAudioChannel();
 
+
             messageInput.focus();
+
         }
 
 
@@ -997,10 +1223,12 @@
 
         usernameInput.addEventListener(
             "keydown",
-            function(event) {
+            event => {
 
                 if (event.key === "Enter") {
+
                     enterChat();
+
                 }
 
             }
@@ -1016,16 +1244,17 @@
             const {
                 data,
                 error
-            } = await supabaseClient
-                .from("messages")
-                .select("*")
-                .eq("chat_id", chatId)
-                .order(
-                    "created_at",
-                    {
-                        ascending: true
-                    }
-                );
+            } =
+                await supabaseClient
+                    .from("messages")
+                    .select("*")
+                    .eq("chat_id", chatId)
+                    .order(
+                        "created_at",
+                        {
+                            ascending: true
+                        }
+                    );
 
 
             if (error) {
@@ -1035,55 +1264,90 @@
                     error
                 );
 
+                showNotificationStatus(
+                    "No se pudieron cargar los mensajes."
+                );
+
                 return;
             }
 
 
             data.forEach(
-                addMessageToScreen
+                message => {
+
+                    addMessageToScreen(
+                        message,
+                        false
+                    );
+
+                }
             );
 
 
             scrollToBottom();
+
         }
 
 
         /* =====================================
-           HORA CORRECTA
+           HORA
         ====================================== */
 
-        function getMessageDate(timestamp) {
+        function getMessageDate(
+            timestamp
+        ) {
 
             if (!timestamp) {
+
                 return new Date();
+
             }
+
 
             const value =
                 String(timestamp).trim();
 
+
             const hasTimezone =
-                /(?:Z|[+-]\d{2}:?\d{2})$/i.test(value);
+                /(?:Z|[+-]\d{2}:?\d{2})$/i
+                    .test(value);
+
 
             const normalizedValue =
                 hasTimezone
                     ? value
                     : value + "Z";
 
-            const date =
-                new Date(normalizedValue);
 
-            if (Number.isNaN(date.getTime())) {
+            const date =
+                new Date(
+                    normalizedValue
+                );
+
+
+            if (
+                Number.isNaN(
+                    date.getTime()
+                )
+            ) {
+
                 return new Date(timestamp);
+
             }
 
+
             return date;
+
         }
 
 
-        function formatMessageTime(timestamp) {
+        function formatMessageTime(
+            timestamp
+        ) {
 
             const date =
                 getMessageDate(timestamp);
+
 
             return new Intl.DateTimeFormat(
                 undefined,
@@ -1093,6 +1357,7 @@
                     hour12: false
                 }
             ).format(date);
+
         }
 
 
@@ -1101,217 +1366,381 @@
         ====================================== */
 
         function addMessageToScreen(
-            message
+            message,
+            fromRealtime = false
         ) {
+
+            /*
+             * Evita duplicados.
+             *
+             * Cada mensaje tiene un ID de Supabase.
+             */
+
+            if (
+                message.id &&
+                messages.querySelector(
+                    `[data-message-id="${message.id}"]`
+                )
+            ) {
+
+                return;
+
+            }
+
 
             const element =
                 document.createElement("div");
 
-            element.classList.add("message");
+
+            element.classList.add(
+                "message"
+            );
+
+
+            if (message.id) {
+
+                element.dataset.messageId =
+                    message.id;
+
+            }
+
 
             const isMine =
                 message.username === username;
 
+
             if (isMine) {
-                element.classList.add("mine");
+
+                element.classList.add(
+                    "mine"
+                );
+
             }
 
-            /* NOMBRE + ESTRELLAS */
+
+            /* =========================
+               NOMBRE
+            ========================== */
 
             const nameWrap =
                 document.createElement("div");
 
-            nameWrap.classList.add("name-wrap");
+
+            nameWrap.classList.add(
+                "name-wrap"
+            );
+
 
             const starLeft =
                 document.createElement("span");
 
-            starLeft.classList.add("star");
-            starLeft.textContent = "✦";
+
+            starLeft.classList.add(
+                "star"
+            );
+
+            starLeft.textContent =
+                "✦";
+
 
             const starSmall =
                 document.createElement("span");
 
-            starSmall.classList.add("star", "small");
-            starSmall.textContent = "✧";
+
+            starSmall.classList.add(
+                "star",
+                "small"
+            );
+
+            starSmall.textContent =
+                "✧";
+
 
             const name =
                 document.createElement("div");
 
-            name.classList.add("name");
-            name.textContent = message.username;
+
+            name.classList.add(
+                "name"
+            );
+
+            name.textContent =
+                message.username;
+
 
             const starRight =
                 document.createElement("span");
 
-            starRight.classList.add("star");
-            starRight.textContent = "✦";
 
-            nameWrap.appendChild(starLeft);
-            nameWrap.appendChild(starSmall);
-            nameWrap.appendChild(name);
-            nameWrap.appendChild(starRight);
+            starRight.classList.add(
+                "star"
+            );
 
-            element.appendChild(nameWrap);
+            starRight.textContent =
+                "✦";
 
-            /* RESPUESTA CITADA */
+
+            nameWrap.appendChild(
+                starLeft
+            );
+
+            nameWrap.appendChild(
+                starSmall
+            );
+
+            nameWrap.appendChild(
+                name
+            );
+
+            nameWrap.appendChild(
+                starRight
+            );
+
+
+            element.appendChild(
+                nameWrap
+            );
+
+
+            /* =========================
+               RESPUESTA CITADA
+            ========================== */
 
             if (message.reply_to_id) {
 
                 const reply =
                     document.createElement("div");
 
-                reply.classList.add("message-reply");
+
+                reply.classList.add(
+                    "message-reply"
+                );
+
 
                 const replyAuthor =
                     document.createElement("strong");
 
+
                 replyAuthor.textContent =
-                    "↩ " + (
+                    "↩ " +
+                    (
                         message.reply_to_username ||
                         "Mensaje"
                     );
 
+
                 const replyText =
                     document.createElement("span");
 
+
                 replyText.textContent =
                     message.reply_to_message ||
-                    "Imagen";
+                    "Mensaje";
 
-                reply.appendChild(replyAuthor);
-                reply.appendChild(replyText);
 
-                element.appendChild(reply);
+                reply.appendChild(
+                    replyAuthor
+                );
+
+                reply.appendChild(
+                    replyText
+                );
+
+
+                element.appendChild(
+                    reply
+                );
+
             }
 
-            /* TEXTO */
+
+            /* =========================
+               TEXTO
+            ========================== */
 
             if (message.message) {
 
                 const text =
                     document.createElement("div");
 
-                text.classList.add("text");
-                text.textContent = message.message;
 
-                element.appendChild(text);
-            }
-
-            /* IMAGEN */
-
-            if (message.image_url) {
-
-                const image =
-                    document.createElement("img");
-
-                image.classList.add("message-image");
-                image.src = message.image_url;
-                image.alt = "Imagen enviada por " + message.username;
-                image.loading = "lazy";
-
-                image.addEventListener(
-                    "click",
-                    () => {
-                        window.open(
-                            message.image_url,
-                            "_blank",
-                            "noopener,noreferrer"
-                        );
-                    }
+                text.classList.add(
+                    "text"
                 );
 
-                element.appendChild(image);
+
+                text.textContent =
+                    message.message;
+
+
+                element.appendChild(
+                    text
+                );
+
             }
 
-            /* HORA */
+
+            /* =========================
+               HORA
+            ========================== */
 
             const time =
                 document.createElement("span");
 
-            time.classList.add("time");
+
+            time.classList.add(
+                "time"
+            );
+
 
             time.textContent =
                 formatMessageTime(
                     message.created_at
                 );
 
-            element.appendChild(time);
 
-            /* RESPONDER */
+            element.appendChild(
+                time
+            );
+
+
+            /* =========================
+               RESPONDER
+            ========================== */
 
             const tools =
                 document.createElement("div");
 
-            tools.classList.add("message-tools");
+
+            tools.classList.add(
+                "message-tools"
+            );
+
 
             const replyButton =
                 document.createElement("button");
 
-            replyButton.type = "button";
-            replyButton.classList.add("reply-button");
-            replyButton.textContent = "↩ Responder";
+
+            replyButton.type =
+                "button";
+
+
+            replyButton.classList.add(
+                "reply-button"
+            );
+
+
+            replyButton.textContent =
+                "↩ Responder";
+
 
             replyButton.addEventListener(
                 "click",
-                () => startReply(message)
+                () => {
+
+                    startReply(
+                        message
+                    );
+
+                }
             );
 
-            tools.appendChild(replyButton);
-            element.appendChild(tools);
 
-            messages.appendChild(element);
+            tools.appendChild(
+                replyButton
+            );
 
-            /*
-             * Solo notificamos mensajes que llegan de otra persona.
-             * El mensaje propio también llega por Realtime, pero no
-             * debe producir una notificación.
-             */
+
+            element.appendChild(
+                tools
+            );
+
+
+            messages.appendChild(
+                element
+            );
+
+
+            /* =========================
+               NOTIFICACIÓN
+            ========================== */
+
             if (
-                message.username !== username &&
-                message._fromRealtime
+                fromRealtime &&
+                message.username !== username
             ) {
-                notifyIncomingMessage(message);
+
+                notifyIncomingMessage(
+                    message
+                );
+
             }
 
+
             scrollToBottom();
+
         }
 
 
         /* =====================================
-           RESPUESTAS
+           RESPONDER
         ====================================== */
 
-        function startReply(message) {
+        function startReply(
+            message
+        ) {
 
             replyTarget = {
-                id: String(message.id),
-                username: message.username,
+
+                id:
+                    String(message.id),
+
+                username:
+                    message.username,
+
                 message:
-                    message.message ||
-                    (message.image_url ? "🖼️ Imagen" : "")
+                    message.message || ""
+
             };
+
 
             replyName.textContent =
                 message.username;
 
-            replyPreview.textContent =
-                replyTarget.message;
 
-            replyBox.classList.add("show");
+            replyPreview.textContent =
+                replyTarget.message ||
+                "Mensaje";
+
+
+            replyBox.classList.add(
+                "show"
+            );
+
 
             messageInput.focus();
+
         }
 
 
         function clearReply() {
 
-            replyTarget = null;
+            replyTarget =
+                null;
 
-            replyBox.classList.remove("show");
 
-            replyName.textContent = "";
-            replyPreview.textContent = "";
+            replyBox.classList.remove(
+                "show"
+            );
+
+
+            replyName.textContent =
+                "";
+
+
+            replyPreview.textContent =
+                "";
+
         }
 
 
@@ -1322,7 +1751,7 @@
 
 
         /* =====================================
-           NOTIFICACIONES DEL NAVEGADOR
+           NOTIFICACIONES
         ====================================== */
 
         async function requestNotificationPermission() {
@@ -1330,52 +1759,121 @@
             if (
                 !("Notification" in window)
             ) {
+
                 return;
+
             }
 
+
             if (
-                Notification.permission === "default"
+                Notification.permission ===
+                "default"
             ) {
 
                 try {
+
                     await Notification.requestPermission();
+
                 } catch (error) {
+
                     console.warn(
-                        "No se pudo solicitar permiso para notificaciones:",
+                        "No se pudo solicitar permiso:",
                         error
                     );
+
                 }
+
             }
+
         }
 
 
-        function notifyIncomingMessage(message) {
+        function showNotificationStatus(
+            text
+        ) {
+
+            notificationStatus.textContent =
+                text;
+
+
+            notificationStatus.classList.add(
+                "show"
+            );
+
+
+            clearTimeout(
+                showNotificationStatus.timer
+            );
+
+
+            showNotificationStatus.timer =
+                setTimeout(
+                    () => {
+
+                        notificationStatus.classList.remove(
+                            "show"
+                        );
+
+                    },
+                    3000
+                );
+
+        }
+
+
+        function notifyIncomingMessage(
+            message
+        ) {
 
             flashDocumentTitle();
 
+
             if (
-                !("Notification" in window) ||
-                Notification.permission !== "granted"
+                !("Notification" in window)
             ) {
+
                 return;
+
             }
 
-            /*
-             * Si el chat está visible, evitamos una notificación
-             * molesta. Si está en otra pestaña/minimizado, avisamos.
-             */
-            if (!document.hidden) {
+
+            if (
+                Notification.permission !==
+                "granted"
+            ) {
+
                 return;
+
             }
+
+
+            /*
+             * Solo aparece notificación si
+             * el usuario está en otra pestaña.
+             */
+
+            if (!document.hidden) {
+
+                return;
+
+            }
+
 
             let body =
                 message.message ||
-                "🖼️ Te enviaron una imagen";
+                "Nuevo mensaje";
 
-            if (body.length > 100) {
+
+            if (
+                body.length > 100
+            ) {
+
                 body =
-                    body.slice(0, 97) + "...";
+                    body.slice(0, 97) +
+                    "...";
+
             }
+
 
             try {
 
@@ -1385,266 +1883,82 @@
                         message.username,
                         {
                             body: body,
-                            icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🌙%3C/text%3E%3C/svg%3E",
-                            tag: "chat-" + chatId
+                            tag:
+                                "chat-" +
+                                chatId
                         }
                     );
 
+
                 notification.onclick =
                     () => {
+
                         window.focus();
+
                         notification.close();
+
                     };
+
 
             } catch (error) {
 
                 console.warn(
-                    "No se pudo mostrar la notificación:",
+                    "No se pudo mostrar notificación:",
                     error
                 );
+
             }
+
         }
 
 
         function flashDocumentTitle() {
 
-            clearInterval(titleFlashTimer);
+            clearInterval(
+                titleFlashTimer
+            );
 
-            let visible = false;
-            let count = 0;
+
+            let visible =
+                false;
+
+            let count =
+                0;
+
 
             titleFlashTimer =
-                setInterval(() => {
+                setInterval(
+                    () => {
 
-                    visible = !visible;
-                    count++;
+                        visible =
+                            !visible;
 
-                    document.title =
-                        visible
-                            ? "💙 Nuevo mensaje"
-                            : notificationTitle;
+                        count++;
 
-                    if (count >= 8) {
-
-                        clearInterval(
-                            titleFlashTimer
-                        );
 
                         document.title =
-                            notificationTitle;
-                    }
-
-                }, 700);
-        }
+                            visible
+                                ? "💙 Nuevo mensaje"
+                                : notificationTitle;
 
 
-        /* =====================================
-           SUBIR IMÁGENES
-        ====================================== */
+                        if (count >= 8) {
 
-        function setUploadStatus(
-            text
-        ) {
-
-            uploadStatus.textContent =
-                text;
-
-            uploadStatus.classList.add(
-                "show"
-            );
-        }
-
-
-        function hideUploadStatus() {
-
-            uploadStatus.classList.remove(
-                "show"
-            );
-        }
-
-
-        imageButton.addEventListener(
-            "click",
-            () => imageInput.click()
-        );
-
-
-        imageInput.addEventListener(
-            "change",
-            async () => {
-
-                const file =
-                    imageInput.files[0];
-
-                if (!file) {
-                    return;
-                }
-
-                /*
-                 * Límite razonable para una página
-                 * de chat sencilla.
-                 */
-                const maxSize =
-                    8 * 1024 * 1024;
-
-                if (file.size > maxSize) {
-
-                    alert(
-                        "La imagen es demasiado grande. El máximo es 8 MB."
-                    );
-
-                    imageInput.value = "";
-                    return;
-                }
-
-                if (
-                    !file.type.startsWith("image/")
-                ) {
-
-                    alert(
-                        "Solo puedes enviar imágenes."
-                    );
-
-                    imageInput.value = "";
-                    return;
-                }
-
-
-                try {
-
-                    setUploadStatus(
-                        "🖼️ Subiendo imagen..."
-                    );
-
-
-                    const safeName =
-                        file.name
-                            .replace(
-                                /[^a-zA-Z0-9._-]/g,
-                                "_"
-                            );
-
-                    const filePath =
-                        chatId +
-                        "/" +
-                        Date.now() +
-                        "-" +
-                        crypto.randomUUID() +
-                        "-" +
-                        safeName;
-
-
-                    const {
-                        error: uploadError
-                    } = await supabaseClient
-                        .storage
-                        .from("chat-media")
-                        .upload(
-                            filePath,
-                            file,
-                            {
-                                cacheControl: "3600",
-                                upsert: false,
-                                contentType: file.type
-                            }
-                        );
-
-
-                    if (uploadError) {
-
-                        console.error(
-                            "Error subiendo imagen:",
-                            uploadError
-                        );
-
-                        throw uploadError;
-                    }
-
-
-                    const {
-                        data: publicData
-                    } =
-                        supabaseClient
-                            .storage
-                            .from("chat-media")
-                            .getPublicUrl(
-                                filePath
+                            clearInterval(
+                                titleFlashTimer
                             );
 
 
-                    const imageUrl =
-                        publicData.publicUrl;
+                            document.title =
+                                notificationTitle;
 
+                        }
 
-                    const {
-                        error: messageError
-                    } =
-                        await supabaseClient
-                            .from("messages")
-                            .insert({
-                                chat_id: chatId,
-                                username: username,
-                                message: "",
-                                image_url: imageUrl,
-                                reply_to_id:
-                                    replyTarget
-                                        ? replyTarget.id
-                                        : null,
-                                reply_to_username:
-                                    replyTarget
-                                        ? replyTarget.username
-                                        : null,
-                                reply_to_message:
-                                    replyTarget
-                                        ? replyTarget.message
-                                        : null
-                            });
+                    },
+                    700
+                );
 
-
-                    if (messageError) {
-
-                        console.error(
-                            "Error creando mensaje de imagen:",
-                            messageError
-                        );
-
-                        throw messageError;
-                    }
-
-
-                    clearReply();
-
-                    setUploadStatus(
-                        "✓ Imagen enviada"
-                    );
-
-                    setTimeout(
-                        hideUploadStatus,
-                        1800
-                    );
-
-                } catch (error) {
-
-                    console.error(
-                        "Error enviando imagen:",
-                        error
-                    );
-
-                    setUploadStatus(
-                        "No se pudo enviar la imagen."
-                    );
-
-                    setTimeout(
-                        hideUploadStatus,
-                        3000
-                    );
-
-                } finally {
-
-                    imageInput.value = "";
-                }
-            }
-        );
+        }
 
 
         /* =====================================
@@ -1653,40 +1967,67 @@
 
         messageForm.addEventListener(
             "submit",
-            async function(event) {
+            async event => {
 
                 event.preventDefault();
+
 
                 const text =
                     messageInput.value.trim();
 
-                if (text === "") {
+
+                if (!text) {
+
                     return;
+
                 }
 
 
+                /*
+                 * Guardamos también la información
+                 * necesaria para mostrar la respuesta.
+                 */
+
+                const messageData = {
+
+                    chat_id:
+                        chatId,
+
+                    username:
+                        username,
+
+                    message:
+                        text,
+
+                    reply_to_id:
+                        replyTarget
+                            ? replyTarget.id
+                            : null,
+
+                    reply_to_username:
+                        replyTarget
+                            ? replyTarget.username
+                            : null,
+
+                    reply_to_message:
+                        replyTarget
+                            ? replyTarget.message
+                            : null
+
+                };
+
+
                 const {
+                    data,
                     error
-                } = await supabaseClient
-                    .from("messages")
-                    .insert({
-                        chat_id: chatId,
-                        username: username,
-                        message: text,
-                        image_url: null,
-                        reply_to_id:
-                            replyTarget
-                                ? replyTarget.id
-                                : null,
-                        reply_to_username:
-                            replyTarget
-                                ? replyTarget.username
-                                : null,
-                        reply_to_message:
-                            replyTarget
-                                ? replyTarget.message
-                                : null
-                    });
+                } =
+                    await supabaseClient
+                        .from("messages")
+                        .insert(
+                            messageData
+                        )
+                        .select()
+                        .single();
 
 
                 if (error) {
@@ -1696,83 +2037,102 @@
                         error
                     );
 
+
                     alert(
-                        "No se pudo enviar el mensaje. Si acabas de activar respuestas/imágenes, revisa la configuración de Supabase."
+                        "No se pudo enviar el mensaje.\n\n" +
+                        "Error: " +
+                        error.message
                     );
 
+
                     return;
+
                 }
 
 
-                messageInput.value = "";
+                /*
+                 * Limpiamos el formulario.
+                 */
+
+                messageInput.value =
+                    "";
+
 
                 clearReply();
 
+
                 messageInput.focus();
+
             }
         );
 
 
         /* =====================================
-           TIEMPO REAL - MENSAJES
+           TIEMPO REAL
         ====================================== */
 
         function subscribeToMessages() {
 
             supabaseClient
+
                 .channel(
-                    "chat-" + chatId
+                    "messages-" +
+                    chatId
                 )
+
                 .on(
                     "postgres_changes",
                     {
                         event: "INSERT",
                         schema: "public",
                         table: "messages",
-                        filter:
-                            "chat_id=eq." + chatId
-                    },
-                    function(payload) {
 
-                        const incoming =
-                            {
-                                ...payload.new,
-                                _fromRealtime: true
-                            };
+                        filter:
+                            "chat_id=eq." +
+                            chatId
+
+                    },
+
+                    payload => {
 
                         addMessageToScreen(
-                            incoming
+                            payload.new,
+                            true
                         );
 
                     }
+
                 )
-                .subscribe();
+
+                .subscribe(
+                    status => {
+
+                        console.log(
+                            "Estado Realtime:",
+                            status
+                        );
+
+                    }
+                );
+
         }
 
 
         /* =====================================
-           WEBRTC - CANAL DE SEÑALIZACIÓN
-
-           No se guarda audio en Supabase.
-           Supabase Realtime solamente pasa:
-             - presencia
-             - offer
-             - answer
-             - ICE candidates
-
-           El audio va directamente entre
-           los navegadores mediante WebRTC.
+           AUDIO WEBRTC
         ====================================== */
 
         async function setupAudioChannel() {
 
             audioChannel =
                 supabaseClient.channel(
-                    "audio-" + chatId,
+                    "audio-" +
+                    chatId,
                     {
                         config: {
                             presence: {
-                                key: crypto.randomUUID()
+                                key:
+                                    crypto.randomUUID()
                             }
                         }
                     }
@@ -1780,6 +2140,7 @@
 
 
             audioChannel
+
                 .on(
                     "presence",
                     {
@@ -1787,6 +2148,7 @@
                     },
                     handlePresenceSync
                 )
+
                 .on(
                     "presence",
                     {
@@ -1794,107 +2156,135 @@
                     },
                     handlePresenceJoin
                 )
+
                 .on(
                     "broadcast",
                     {
                         event: "webrtc"
                     },
-                    async ({ payload }) => {
+                    async ({
+                        payload
+                    }) => {
 
-                        if (!payload) return;
-
-                        await handleWebRTCSignal(payload);
-                    }
-                );
-
-
-            const status =
-                await audioChannel.subscribe(
-                    async (status) => {
-
-                        if (status === "SUBSCRIBED") {
-
-                            await audioChannel.track({
-                                username: username,
-                                joinedAt: Date.now()
-                            });
-
-                            setAudioStatus(
-                                "Audio listo · micrófono apagado"
-                            );
+                        if (!payload) {
+                            return;
                         }
+
+
+                        await handleWebRTCSignal(
+                            payload
+                        );
+
                     }
                 );
 
 
-            if (status !== "SUBSCRIBED") {
-                console.warn(
-                    "No se pudo conectar el canal de audio:",
-                    status
-                );
-            }
+            await audioChannel.subscribe(
+                async status => {
+
+                    if (
+                        status ===
+                        "SUBSCRIBED"
+                    ) {
+
+                        await audioChannel.track(
+                            {
+                                username:
+                                    username,
+
+                                joinedAt:
+                                    Date.now()
+                            }
+                        );
+
+
+                        setAudioStatus(
+                            "Audio listo · micrófono apagado"
+                        );
+
+                    }
+
+                }
+            );
+
         }
 
 
         function getPresenceCount() {
 
-            if (!audioChannel) return 0;
+            if (!audioChannel) {
+
+                return 0;
+
+            }
+
 
             const state =
                 audioChannel.presenceState();
 
+
             return Object.keys(state).length;
+
         }
 
 
         async function handlePresenceSync() {
 
-            const count =
-                getPresenceCount();
-
             remotePeerPresent =
-                count > 1;
+                getPresenceCount() > 1;
+
 
             if (
                 remotePeerPresent &&
                 audioStarted
             ) {
+
                 await ensurePeerConnection();
 
+
                 if (!makingOffer) {
+
                     await createOffer();
+
                 }
+
             }
+
         }
 
 
         async function handlePresenceJoin() {
 
-            remotePeerPresent = true;
+            remotePeerPresent =
+                true;
 
-            /*
-             * Si ya tenemos el micrófono activo,
-             * intentamos iniciar la conexión.
-             */
+
             if (audioStarted) {
 
                 await ensurePeerConnection();
 
+
                 if (!makingOffer) {
+
                     await createOffer();
+
                 }
+
             }
+
         }
 
 
         /* =====================================
-           CREAR CONEXIÓN PEER
+           PEER CONNECTION
         ====================================== */
 
         async function ensurePeerConnection() {
 
             if (peerConnection) {
+
                 return peerConnection;
+
             }
 
 
@@ -1905,21 +2295,30 @@
 
 
             peerConnection.onicecandidate =
-                async (event) => {
+                async event => {
 
                     if (!event.candidate) {
+
                         return;
+
                     }
 
+
                     await sendSignal({
-                        type: "candidate",
-                        candidate: event.candidate
+
+                        type:
+                            "candidate",
+
+                        candidate:
+                            event.candidate
+
                     });
+
                 };
 
 
             peerConnection.ontrack =
-                async (event) => {
+                async event => {
 
                     if (
                         event.streams &&
@@ -1931,140 +2330,150 @@
 
                     } else {
 
-                        const stream =
+                        remoteAudio.srcObject =
                             new MediaStream([
                                 event.track
                             ]);
 
-                        remoteAudio.srcObject =
-                            stream;
                     }
 
 
                     try {
+
                         await remoteAudio.play();
+
                     } catch (error) {
+
                         console.warn(
-                            "El navegador bloqueó el audio automático:",
+                            "El navegador bloqueó el audio:",
                             error
                         );
+
                     }
 
+
                     setAudioStatus(
-                        "🔊 Audio de la otra persona conectado",
+                        "🔊 Audio conectado",
                         true
                     );
+
                 };
 
 
             peerConnection.onconnectionstatechange =
                 () => {
 
+                    if (!peerConnection) {
+
+                        return;
+
+                    }
+
+
                     const state =
                         peerConnection.connectionState;
 
-                    if (state === "connected") {
+
+                    if (
+                        state ===
+                        "connected"
+                    ) {
 
                         setAudioStatus(
                             audioStarted
-                                ? "🎤 Micrófono activo · 🔊 audio conectado"
+                                ? "🎙️ Micrófono activo · 🔊 audio conectado"
                                 : "🔊 Audio conectado · micrófono apagado",
                             audioStarted
                         );
 
-                    } else if (
-                        state === "disconnected" ||
-                        state === "failed"
+                    }
+
+
+                    if (
+                        state === "failed" ||
+                        state === "disconnected"
                     ) {
 
                         setAudioStatus(
                             "Reconectando audio..."
                         );
-                    }
-                };
 
-
-            peerConnection.onnegotiationneeded =
-                async () => {
-
-                    if (
-                        !audioStarted ||
-                        makingOffer
-                    ) {
-                        return;
                     }
 
-                    try {
-                        await createOffer();
-                    } catch (error) {
-                        console.error(
-                            "Error creando oferta:",
-                            error
-                        );
-                    }
                 };
 
 
             /*
-             * IMPORTANTE:
-             * El track local siempre puede existir,
-             * pero empieza muted/desactivado.
+             * Agregamos el micrófono si ya existe.
              */
+
             if (localStream) {
 
                 localStream
                     .getTracks()
-                    .forEach(track => {
+                    .forEach(
+                        track => {
 
-                        peerConnection.addTrack(
-                            track,
-                            localStream
-                        );
+                            peerConnection.addTrack(
+                                track,
+                                localStream
+                            );
 
-                    });
+                        }
+                    );
 
             }
 
 
             return peerConnection;
+
         }
 
 
         /* =====================================
-           OBTENER MICRÓFONO
-
-           Solo se pide permiso cuando el usuario
-           pulsa el botón.
+           MICRÓFONO
         ====================================== */
 
         async function getLocalMicrophone() {
 
             if (localStream) {
+
                 return localStream;
+
             }
 
 
             try {
 
                 localStream =
-                    await navigator.mediaDevices
+                    await navigator
+                        .mediaDevices
                         .getUserMedia({
+
                             audio: {
-                                echoCancellation: true,
-                                noiseSuppression: true,
-                                autoGainControl: true
+
+                                echoCancellation:
+                                    true,
+
+                                noiseSuppression:
+                                    true,
+
+                                autoGainControl:
+                                    true
+
                             },
-                            video: false
+
+                            video:
+                                false
+
                         });
 
 
                 localAudioTrack =
-                    localStream.getAudioTracks()[0];
+                    localStream
+                        .getAudioTracks()[0];
 
-                /*
-                 * Empieza apagado aunque el navegador
-                 * haya concedido permiso.
-                 */
+
                 localAudioTrack.enabled =
                     false;
 
@@ -2074,16 +2483,18 @@
             } catch (error) {
 
                 console.error(
-                    "No se pudo acceder al micrófono:",
+                    "Error micrófono:",
                     error
                 );
 
+
                 if (
-                    error.name === "NotAllowedError"
+                    error.name ===
+                    "NotAllowedError"
                 ) {
 
                     alert(
-                        "Necesitas permitir el uso del micrófono en el navegador para activar el audio."
+                        "Necesitas permitir el micrófono en el navegador."
                     );
 
                 } else {
@@ -2091,66 +2502,73 @@
                     alert(
                         "No se pudo acceder al micrófono."
                     );
+
                 }
 
+
                 return null;
+
             }
+
         }
 
 
         /* =====================================
-           ACTIVAR / DESACTIVAR MICRÓFONO
+           BOTÓN DE LLAMADA
         ====================================== */
 
         micButton.addEventListener(
             "click",
-            async function() {
+            async () => {
 
                 if (!audioChannel) {
+
                     setAudioStatus(
                         "El audio todavía está conectando..."
                     );
+
                     return;
+
                 }
 
 
                 /*
-                 * Primera pulsación:
-                 * pide permiso al navegador.
+                 * Primera vez:
+                 * solicitar permiso.
                  */
+
                 if (!localStream) {
 
                     micButton.classList.add(
                         "waiting"
                     );
 
+
                     const stream =
                         await getLocalMicrophone();
+
 
                     micButton.classList.remove(
                         "waiting"
                     );
 
+
                     if (!stream) {
+
                         return;
+
                     }
 
 
                     await ensurePeerConnection();
 
-                    /*
-                     * Aseguramos que el track empiece
-                     * apagado hasta terminar la preparación.
-                     */
-                    if (localAudioTrack) {
-                        localAudioTrack.enabled =
-                            false;
-                    }
                 }
 
 
                 if (!localAudioTrack) {
+
                     return;
+
                 }
 
 
@@ -2164,60 +2582,73 @@
 
                 if (audioStarted) {
 
-                    micButton.classList.add("active");
+                    micButton.classList.add(
+                        "active"
+                    );
 
-                    micButton.textContent = "🎙️";
+
+                    micButton.textContent =
+                        "🎙️";
+
+
+                    micButton.title =
+                        "Apagar micrófono";
+
 
                     micButton.setAttribute(
                         "aria-label",
                         "Apagar micrófono"
                     );
 
-                    micButton.title =
-                        "Apagar micrófono";
-
 
                     setAudioStatus(
                         remotePeerPresent
-                            ? "🎙️ Micrófono activo · 🔊 audio conectado"
+                            ? "🎙️ Micrófono activo · 🔊 conectado"
                             : "🎙️ Micrófono activo · esperando a la otra persona",
                         true
                     );
 
 
-                    /*
-                     * Si la otra persona ya está en el chat,
-                     * comenzamos la negociación.
-                     */
                     if (remotePeerPresent) {
 
                         await ensurePeerConnection();
 
+
                         if (!makingOffer) {
+
                             await createOffer();
+
                         }
 
                     }
 
                 } else {
 
-                    micButton.classList.remove("active");
+                    micButton.classList.remove(
+                        "active"
+                    );
 
-                    micButton.textContent = "📞";
+
+                    micButton.textContent =
+                        "📞";
+
+
+                    micButton.title =
+                        "Activar micrófono";
+
 
                     micButton.setAttribute(
                         "aria-label",
                         "Activar micrófono"
                     );
 
-                    micButton.title =
-                        "Activar micrófono";
-
 
                     setAudioStatus(
-                        "🔇 Micrófono apagado · audio listo"
+                        "🔇 Micrófono apagado"
                     );
+
                 }
+
             }
         );
 
@@ -2228,35 +2659,42 @@
 
         async function createOffer() {
 
-            if (!peerConnection) {
-                return;
-            }
+            if (
+                !peerConnection ||
+                !remotePeerPresent ||
+                makingOffer
+            ) {
 
-            if (!remotePeerPresent) {
                 return;
-            }
 
-
-            if (makingOffer) {
-                return;
             }
 
 
             try {
 
-                makingOffer = true;
+                makingOffer =
+                    true;
+
 
                 const offer =
-                    await peerConnection.createOffer();
+                    await peerConnection
+                        .createOffer();
 
-                await peerConnection.setLocalDescription(
-                    offer
-                );
+
+                await peerConnection
+                    .setLocalDescription(
+                        offer
+                    );
+
 
                 await sendSignal({
-                    type: "offer",
+
+                    type:
+                        "offer",
+
                     description:
                         peerConnection.localDescription
+
                 });
 
             } catch (error) {
@@ -2268,166 +2706,193 @@
 
             } finally {
 
-                makingOffer = false;
+                makingOffer =
+                    false;
+
             }
+
         }
 
 
         /* =====================================
-           ENVIAR SEÑAL WEBRTC
+           ENVIAR SEÑAL
         ====================================== */
 
-        async function sendSignal(data) {
+        async function sendSignal(
+            data
+        ) {
 
             if (!audioChannel) {
+
                 return;
+
             }
+
 
             try {
 
                 await audioChannel.send({
-                    type: "broadcast",
-                    event: "webrtc",
-                    payload: {
-                        ...data
-                    }
+
+                    type:
+                        "broadcast",
+
+                    event:
+                        "webrtc",
+
+                    payload:
+                        data
+
                 });
 
             } catch (error) {
 
                 console.error(
-                    "Error enviando señal WebRTC:",
+                    "Error señal WebRTC:",
                     error
                 );
+
             }
+
         }
 
 
         /* =====================================
-           RECIBIR SEÑAL WEBRTC
+           RECIBIR SEÑAL
         ====================================== */
 
-        async function handleWebRTCSignal(payload) {
+        async function handleWebRTCSignal(
+            payload
+        ) {
 
-            if (!payload || !audioChannel) {
+            if (
+                !payload ||
+                !audioChannel
+            ) {
+
                 return;
+
             }
 
 
-            /*
-             * No necesitamos identificarnos por nombre:
-             * Realtime broadcast entrega el evento a
-             * los otros clientes del canal, no al emisor.
-             */
-
             try {
 
+                /* OFFER */
+
                 if (
-                    payload.type === "offer"
+                    payload.type ===
+                    "offer"
                 ) {
 
-                    /*
-                     * La persona que recibe una offer
-                     * prepara su conexión.
-                     */
                     await ensurePeerConnection();
 
 
-                    await peerConnection.setRemoteDescription(
-                        new RTCSessionDescription(
-                            payload.description
-                        )
-                    );
+                    await peerConnection
+                        .setRemoteDescription(
+                            new RTCSessionDescription(
+                                payload.description
+                            )
+                        );
 
 
                     const answer =
-                        await peerConnection.createAnswer();
+                        await peerConnection
+                            .createAnswer();
 
 
-                    await peerConnection.setLocalDescription(
-                        answer
-                    );
+                    await peerConnection
+                        .setLocalDescription(
+                            answer
+                        );
 
 
                     await sendSignal({
-                        type: "answer",
+
+                        type:
+                            "answer",
+
                         description:
                             peerConnection.localDescription
+
                     });
 
-
-                    if (
-                        audioStarted &&
-                        localAudioTrack
-                    ) {
-                        localAudioTrack.enabled =
-                            true;
-                    }
+                }
 
 
-                } else if (
-                    payload.type === "answer"
+                /* ANSWER */
+
+                else if (
+                    payload.type ===
+                    "answer"
                 ) {
 
                     if (!peerConnection) {
+
                         return;
+
                     }
 
 
-                    await peerConnection.setRemoteDescription(
-                        new RTCSessionDescription(
-                            payload.description
-                        )
-                    );
+                    await peerConnection
+                        .setRemoteDescription(
+                            new RTCSessionDescription(
+                                payload.description
+                            )
+                        );
+
+                }
 
 
-                } else if (
-                    payload.type === "candidate"
+                /* ICE */
+
+                else if (
+                    payload.type ===
+                    "candidate"
                 ) {
 
-                    if (!peerConnection) {
+                    if (
+                        !peerConnection ||
+                        !payload.candidate
+                    ) {
+
                         return;
+
                     }
 
 
-                    if (
-                        payload.candidate
-                    ) {
+                    try {
 
-                        try {
-
-                            await peerConnection.addIceCandidate(
+                        await peerConnection
+                            .addIceCandidate(
                                 new RTCIceCandidate(
                                     payload.candidate
                                 )
                             );
 
-                        } catch (error) {
+                    } catch (error) {
 
-                            /*
-                             * Algunos candidatos pueden llegar
-                             * antes de la descripción remota.
-                             */
-                            console.warn(
-                                "No se pudo añadir ICE candidate:",
-                                error
-                            );
-                        }
+                        console.warn(
+                            "Error ICE:",
+                            error
+                        );
+
                     }
+
                 }
 
             } catch (error) {
 
                 console.error(
-                    "Error procesando señal WebRTC:",
+                    "Error WebRTC:",
                     error
                 );
+
             }
+
         }
 
 
         /* =====================================
-           LIMPIEZA AL SALIR
+           LIMPIEZA
         ====================================== */
 
         window.addEventListener(
@@ -2438,20 +2903,27 @@
 
                     localStream
                         .getTracks()
-                        .forEach(track => {
-                            track.stop();
-                        });
+                        .forEach(
+                            track =>
+                                track.stop()
+                        );
+
                 }
 
 
                 if (peerConnection) {
+
                     peerConnection.close();
+
                 }
 
 
                 if (audioChannel) {
+
                     audioChannel.unsubscribe();
+
                 }
+
             }
         );
 
@@ -2459,8 +2931,15 @@
         window.addEventListener(
             "focus",
             () => {
-                clearInterval(titleFlashTimer);
-                document.title = notificationTitle;
+
+                clearInterval(
+                    titleFlashTimer
+                );
+
+
+                document.title =
+                    notificationTitle;
+
             }
         );
 
@@ -2473,9 +2952,12 @@
 
             messages.scrollTop =
                 messages.scrollHeight;
+
         }
 
     </script>
 
 </body>
+
 </html>
+```
