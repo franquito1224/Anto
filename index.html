@@ -43,10 +43,12 @@
             position: fixed;
             inset: 0;
             pointer-events: none;
+
             background:
                 radial-gradient(circle at 15% 20%, rgba(74, 154, 255, .12), transparent 25%),
                 radial-gradient(circle at 85% 75%, rgba(57, 202, 255, .10), transparent 28%),
                 linear-gradient(145deg, #061329, #0a1c3b 50%, #041024);
+
             z-index: -2;
         }
 
@@ -61,23 +63,29 @@
             position: fixed;
             inset: 0;
             pointer-events: none;
+
             color: rgba(190, 231, 255, .42);
             font-size: 13px;
             line-height: 7;
             letter-spacing: 18px;
             padding: 10px 3%;
             opacity: .55;
+
             z-index: -1;
         }
 
-        /* LOGIN */
+        /* =========================
+           LOGIN
+        ========================== */
 
         #login-screen {
             position: fixed;
             inset: 0;
+
             display: flex;
             justify-content: center;
             align-items: center;
+
             padding: 20px;
 
             background:
@@ -87,10 +95,16 @@
 
         .login-box {
             width: min(90%, 420px);
+
             padding: 38px 34px;
+
             background: rgba(9, 27, 55, .92);
-            border: 1px solid rgba(142, 216, 255, .22);
+
+            border:
+                1px solid rgba(142, 216, 255, .22);
+
             border-radius: 24px;
+
             text-align: center;
 
             box-shadow:
@@ -103,7 +117,12 @@
         .login-icon {
             font-size: 42px;
             margin-bottom: 10px;
-            filter: drop-shadow(0 0 12px rgba(142, 216, 255, .35));
+
+            filter:
+                drop-shadow(
+                    0 0 12px
+                    rgba(142, 216, 255, .35)
+                );
         }
 
         .login-box h1 {
@@ -119,59 +138,102 @@
 
         #username {
             width: 100%;
+
             padding: 14px 16px;
+
             background: #06162d;
+
             color: white;
-            border: 1px solid #245282;
+
+            border:
+                1px solid #245282;
+
             border-radius: 13px;
+
             outline: none;
+
             font-size: 16px;
+
             margin-bottom: 15px;
         }
 
         #username:focus {
             border-color: var(--blue-light);
-            box-shadow: 0 0 0 3px rgba(142, 216, 255, .10);
+
+            box-shadow:
+                0 0 0 3px
+                rgba(142, 216, 255, .10);
         }
 
         #enter-button {
             width: 100%;
+
             padding: 14px;
+
             border: none;
+
             border-radius: 13px;
-            background: linear-gradient(135deg, #3d8eea, #58b7f4);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #3d8eea,
+                    #58b7f4
+                );
+
             color: white;
+
             font-size: 16px;
+
             font-weight: bold;
+
             cursor: pointer;
+
             transition: .2s;
-            box-shadow: 0 8px 22px rgba(61, 142, 234, .25);
+
+            box-shadow:
+                0 8px 22px
+                rgba(61, 142, 234, .25);
         }
 
         #enter-button:hover {
             transform: translateY(-2px);
         }
 
-        /* CHAT */
+
+        /* =========================
+           CHAT
+        ========================== */
 
         #chat-screen {
             display: none;
+
             height: 100vh;
             width: 100%;
+
             flex-direction: column;
         }
 
         .chat-header {
             min-height: 70px;
+
             display: flex;
             align-items: center;
             justify-content: space-between;
+
             padding: 0 20px;
 
-            background: rgba(5, 19, 42, .94);
-            border-bottom: 1px solid rgba(142, 216, 255, .15);
+            background:
+                rgba(5, 19, 42, .94);
 
-            box-shadow: 0 5px 25px rgba(0, 0, 0, .18);
+            border-bottom:
+                1px solid
+                rgba(142, 216, 255, .15);
+
+            box-shadow:
+                0 5px 25px
+                rgba(0, 0, 0, .18);
+
             backdrop-filter: blur(12px);
         }
 
@@ -189,11 +251,22 @@
             align-items: center;
             justify-content: center;
 
-            background: linear-gradient(145deg, #164f8d, #237bc2);
-            border: 1px solid rgba(142, 216, 255, .25);
+            background:
+                linear-gradient(
+                    145deg,
+                    #164f8d,
+                    #237bc2
+                );
+
+            border:
+                1px solid
+                rgba(142, 216, 255, .25);
+
             border-radius: 50%;
 
-            box-shadow: 0 0 20px rgba(61, 142, 234, .20);
+            box-shadow:
+                0 0 20px
+                rgba(61, 142, 234, .20);
         }
 
         .chat-title h2 {
@@ -207,9 +280,13 @@
 
         .online::before {
             content: "●";
+
             color: #69d7ff;
+
             margin-right: 5px;
-            text-shadow: 0 0 8px #69d7ff;
+
+            text-shadow:
+                0 0 8px #69d7ff;
         }
 
         #current-user {
@@ -217,7 +294,10 @@
             font-size: 14px;
         }
 
-        /* LLAMADA */
+
+        /* =========================
+           LLAMADA
+        ========================== */
 
         .header-actions {
             display: flex;
@@ -229,51 +309,75 @@
             width: 46px;
             height: 46px;
 
-            border: 1px solid rgba(142, 216, 255, .22);
+            border:
+                1px solid
+                rgba(142, 216, 255, .22);
+
             border-radius: 50%;
 
-            background: rgba(19, 52, 91, .85);
+            background:
+                rgba(19, 52, 91, .85);
+
             color: white;
 
             font-size: 21px;
+
             cursor: pointer;
 
             transition: .2s;
 
-            box-shadow: 0 5px 18px rgba(0, 0, 0, .18);
+            box-shadow:
+                0 5px 18px
+                rgba(0, 0, 0, .18);
         }
 
         #mic-button:hover {
             transform: scale(1.06);
-            border-color: rgba(142, 216, 255, .55);
+
+            border-color:
+                rgba(142, 216, 255, .55);
         }
 
         #mic-button.active {
-            background: linear-gradient(145deg, #36b978, #42d392);
-            border-color: rgba(190, 255, 224, .65);
+            background:
+                linear-gradient(
+                    145deg,
+                    #36b978,
+                    #42d392
+                );
+
+            border-color:
+                rgba(190, 255, 224, .65);
 
             box-shadow:
-                0 0 22px rgba(66, 211, 146, .30);
+                0 0 22px
+                rgba(66, 211, 146, .30);
         }
 
         #mic-button.waiting {
-            animation: pulseMic 1.5s infinite;
+            animation:
+                pulseMic 1.5s infinite;
         }
 
         @keyframes pulseMic {
 
             0%,
             100% {
-                box-shadow: 0 0 0 0 rgba(66, 211, 146, .35);
+                box-shadow:
+                    0 0 0 0
+                    rgba(66, 211, 146, .35);
             }
 
             50% {
-                box-shadow: 0 0 0 9px rgba(66, 211, 146, 0);
+                box-shadow:
+                    0 0 0 9px
+                    rgba(66, 211, 146, 0);
             }
         }
 
         #audio-status {
             position: fixed;
+
             right: 18px;
             top: 80px;
 
@@ -281,16 +385,22 @@
 
             display: none;
 
-            max-width: calc(100vw - 36px);
+            max-width:
+                calc(100vw - 36px);
 
             padding: 8px 12px;
 
             border-radius: 12px;
 
-            background: rgba(7, 25, 52, .92);
-            border: 1px solid rgba(142, 216, 255, .16);
+            background:
+                rgba(7, 25, 52, .92);
+
+            border:
+                1px solid
+                rgba(142, 216, 255, .16);
 
             color: #a9c8e5;
+
             font-size: 11px;
 
             backdrop-filter: blur(10px);
@@ -302,14 +412,19 @@
 
         #audio-status.active {
             color: #9df0c7;
-            border-color: rgba(66, 211, 146, .25);
+
+            border-color:
+                rgba(66, 211, 146, .25);
         }
 
         #remote-audio {
             display: none;
         }
 
-        /* MENSAJES */
+
+        /* =========================
+           MENSAJES
+        ========================== */
 
         #messages {
             flex: 1;
@@ -319,13 +434,22 @@
             padding: 24px 20px;
 
             display: flex;
+
             flex-direction: column;
 
             gap: 13px;
 
             background:
-                radial-gradient(circle at 20% 15%, rgba(55, 130, 210, .08), transparent 25%),
-                radial-gradient(circle at 80% 80%, rgba(75, 178, 240, .07), transparent 28%),
+                radial-gradient(
+                    circle at 20% 15%,
+                    rgba(55, 130, 210, .08),
+                    transparent 25%
+                ),
+                radial-gradient(
+                    circle at 80% 80%,
+                    rgba(75, 178, 240, .07),
+                    transparent 28%
+                ),
                 #06152d;
 
             scroll-behavior: smooth;
@@ -336,7 +460,8 @@
         }
 
         #messages::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, .03);
+            background:
+                rgba(255, 255, 255, .03);
         }
 
         #messages::-webkit-scrollbar-thumb {
@@ -349,35 +474,52 @@
 
             padding: 11px 15px;
 
-            border-radius: 17px 17px 17px 5px;
+            border-radius:
+                17px 17px 17px 5px;
 
             background:
-                linear-gradient(145deg, var(--bubble), #83d0f7);
+                linear-gradient(
+                    145deg,
+                    var(--bubble),
+                    #83d0f7
+                );
 
             color: var(--text-dark);
 
             align-self: flex-start;
 
-            border: 1px solid rgba(215, 246, 255, .55);
+            border:
+                1px solid
+                rgba(215, 246, 255, .55);
 
             box-shadow:
-                0 7px 20px rgba(0, 0, 0, .18),
-                0 0 18px rgba(117, 201, 245, .08);
+                0 7px 20px
+                rgba(0, 0, 0, .18),
 
-            animation: messageIn .2s ease-out;
+                0 0 18px
+                rgba(117, 201, 245, .08);
+
+            animation:
+                messageIn .2s ease-out;
         }
 
         .message.mine {
             align-self: flex-end;
 
-            border-radius: 17px 17px 5px 17px;
+            border-radius:
+                17px 17px 5px 17px;
 
             background:
-                linear-gradient(145deg, #b3e6ff, #83d1fa);
+                linear-gradient(
+                    145deg,
+                    #b3e6ff,
+                    #83d1fa
+                );
         }
 
         .name-wrap {
             display: flex;
+
             align-items: center;
 
             gap: 7px;
@@ -389,10 +531,12 @@
 
         .star {
             color: #fff8bd;
+
             font-size: 11px;
 
             text-shadow:
-                0 0 6px rgba(255, 248, 189, .9);
+                0 0 6px
+                rgba(255, 248, 189, .9);
         }
 
         .star.small {
@@ -402,15 +546,19 @@
 
         .message .name {
             font-size: 12px;
+
             font-weight: bold;
+
             color: #17466e;
         }
 
         .message .text {
             font-size: 15px;
+
             line-height: 1.45;
 
             white-space: pre-wrap;
+
             word-break: break-word;
         }
 
@@ -426,7 +574,10 @@
             margin-top: 6px;
         }
 
-        /* SISTEMA */
+
+        /* =========================
+           SISTEMA
+        ========================== */
 
         .system-message {
             align-self: center;
@@ -435,11 +586,14 @@
 
             text-align: center;
 
-            background: rgba(20, 54, 91, .45);
+            background:
+                rgba(20, 54, 91, .45);
 
             color: #86b9dc;
 
-            border: 1px solid rgba(134, 185, 220, .10);
+            border:
+                1px solid
+                rgba(134, 185, 220, .10);
 
             padding: 9px 14px;
 
@@ -452,8 +606,9 @@
             color: #9fd5f3;
         }
 
+
         /* =========================
-           RESPUESTAS VISUALES
+           RESPUESTAS
         ========================== */
 
         .reply-box {
@@ -465,10 +620,12 @@
 
             padding: 8px 12px;
 
-            background: rgba(13, 35, 69, .96);
+            background:
+                rgba(13, 35, 69, .96);
 
             border-top:
-                1px solid rgba(142, 216, 255, .12);
+                1px solid
+                rgba(142, 216, 255, .12);
         }
 
         .reply-box.show {
@@ -477,17 +634,21 @@
 
         .reply-line {
             flex: 1;
+
             min-width: 0;
 
             border-left:
-                3px solid var(--blue-light);
+                3px solid
+                var(--blue-light);
 
             padding-left: 9px;
         }
 
         .reply-label {
             font-size: 11px;
+
             color: #8ed8ff;
+
             margin-bottom: 2px;
         }
 
@@ -527,7 +688,8 @@
             padding: 7px 9px;
 
             border-left:
-                3px solid #3d8eea;
+                3px solid
+                #3d8eea;
 
             background:
                 rgba(8, 32, 61, .10);
@@ -559,6 +721,7 @@
 
         .message-tools {
             display: flex;
+
             justify-content: flex-end;
 
             margin-top: 5px;
@@ -580,10 +743,14 @@
 
         .reply-button:hover {
             color: #17466e;
+
             text-decoration: underline;
         }
 
-        /* CAJA MENSAJE */
+
+        /* =========================
+           CAJA MENSAJE
+        ========================== */
 
         .message-area {
             display: flex;
@@ -592,13 +759,16 @@
 
             padding: 13px 15px;
 
-            background: rgba(7, 25, 52, .97);
+            background:
+                rgba(7, 25, 52, .97);
 
             border-top:
-                1px solid rgba(142, 216, 255, .15);
+                1px solid
+                rgba(142, 216, 255, .15);
 
             box-shadow:
-                0 -7px 25px rgba(0, 0, 0, .16);
+                0 -7px 25px
+                rgba(0, 0, 0, .16);
         }
 
         #message-input {
@@ -610,7 +780,8 @@
 
             color: white;
 
-            border: 1px solid #5599d5;
+            border:
+                1px solid #5599d5;
 
             border-radius: 13px;
 
@@ -619,11 +790,13 @@
             font-size: 15px;
 
             box-shadow:
-                inset 0 2px 8px rgba(0, 0, 0, .12);
+                inset 0 2px 8px
+                rgba(0, 0, 0, .12);
         }
 
         #message-input::placeholder {
-            color: rgba(235, 249, 255, .72);
+            color:
+                rgba(235, 249, 255, .72);
         }
 
         #message-input:focus {
@@ -632,8 +805,11 @@
             border-color: #8ed8ff;
 
             box-shadow:
-                0 0 0 3px rgba(142, 216, 255, .10),
-                inset 0 2px 8px rgba(0, 0, 0, .12);
+                0 0 0 3px
+                rgba(142, 216, 255, .10),
+
+                inset 0 2px 8px
+                rgba(0, 0, 0, .12);
         }
 
         #send-button {
@@ -644,7 +820,11 @@
             border-radius: 13px;
 
             background:
-                linear-gradient(145deg, #55b8f0, #3285d0);
+                linear-gradient(
+                    145deg,
+                    #55b8f0,
+                    #3285d0
+                );
 
             color: white;
 
@@ -655,7 +835,8 @@
             transition: .2s;
 
             box-shadow:
-                0 7px 18px rgba(50, 133, 208, .25);
+                0 7px 18px
+                rgba(50, 133, 208, .25);
         }
 
         #send-button:hover {
@@ -668,6 +849,7 @@
 
             from {
                 opacity: 0;
+
                 transform:
                     translateY(5px)
                     scale(.98);
@@ -675,13 +857,17 @@
 
             to {
                 opacity: 1;
+
                 transform:
                     translateY(0)
                     scale(1);
             }
         }
 
-        /* NOTIFICACIONES */
+
+        /* =========================
+           NOTIFICACIONES
+        ========================== */
 
         #notification-status {
             position: fixed;
@@ -703,21 +889,26 @@
                 rgba(7, 25, 52, .95);
 
             border:
-                1px solid rgba(142, 216, 255, .18);
+                1px solid
+                rgba(142, 216, 255, .18);
 
             color: #bfe7ff;
 
             font-size: 12px;
 
             box-shadow:
-                0 8px 25px rgba(0, 0, 0, .25);
+                0 8px 25px
+                rgba(0, 0, 0, .25);
         }
 
         #notification-status.show {
             display: block;
         }
 
-        /* MÓVIL */
+
+        /* =========================
+           MÓVIL
+        ========================== */
 
         @media (max-width: 600px) {
 
@@ -753,13 +944,16 @@
                 top: 75px;
                 right: 10px;
             }
+
         }
     </style>
 </head>
 
 <body>
 
-    <!-- LOGIN -->
+    <!-- =========================
+         LOGIN
+    ========================== -->
 
     <section id="login-screen">
 
@@ -795,7 +989,9 @@
     </section>
 
 
-    <!-- CHAT -->
+    <!-- =========================
+         CHAT
+    ========================== -->
 
     <main id="chat-screen">
 
@@ -820,6 +1016,7 @@
                 </div>
 
             </div>
+
 
             <div class="header-actions">
 
@@ -880,7 +1077,9 @@
         </section>
 
 
-        <!-- RESPONDER -->
+        <!-- =========================
+             RESPONDER
+        ========================== -->
 
         <div
             class="reply-box"
@@ -915,7 +1114,9 @@
         </div>
 
 
-        <!-- ESCRIBIR -->
+        <!-- =========================
+             ESCRIBIR
+        ========================== -->
 
         <form
             class="message-area"
@@ -1014,7 +1215,9 @@
             document.getElementById("cancel-reply");
 
         const notificationStatus =
-            document.getElementById("notification-status");
+            document.getElementById(
+                "notification-status"
+            );
 
 
         /* =====================================
@@ -1024,10 +1227,12 @@
         let username = "";
 
         /*
-         * IMPORTANTE:
-         * La respuesta ahora es SOLO visual.
-         * No se guarda en Supabase.
+         * Ahora replyTarget NO es solamente visual.
+         *
+         * Se utiliza para construir un mensaje
+         * especial que sí se guarda en Supabase.
          */
+
         let replyTarget = null;
 
         let notificationTitle =
@@ -1126,7 +1331,9 @@
                         },
                         3500
                     );
+
             }
+
         }
 
 
@@ -1144,6 +1351,7 @@
                 usernameInput.focus();
 
                 return;
+
             }
 
             username = name;
@@ -1191,6 +1399,93 @@
 
 
         /* =====================================
+           PARSEAR MENSAJE
+        ====================================== */
+
+        /*
+         * Los mensajes normales siguen siendo texto.
+         *
+         * Los mensajes de respuesta se guardan así:
+         *
+         * {
+         *   "__reply": true,
+         *   "reply": {
+         *      "username": "...",
+         *      "message": "..."
+         *   },
+         *   "message": "Mi respuesta"
+         * }
+         *
+         * De esta forma no necesitamos crear
+         * columnas nuevas en Supabase.
+         */
+
+        function parseStoredMessage(
+            message
+        ) {
+
+            if (
+                typeof message !== "string"
+            ) {
+
+                return {
+
+                    text: "",
+                    reply: null
+
+                };
+
+            }
+
+
+            try {
+
+                const parsed =
+                    JSON.parse(message);
+
+                if (
+                    parsed &&
+                    parsed.__reply === true &&
+                    typeof parsed.message === "string"
+                ) {
+
+                    return {
+
+                        text:
+                            parsed.message,
+
+                        reply:
+                            parsed.reply || null
+
+                    };
+
+                }
+
+            } catch (error) {
+
+                /*
+                 * No pasa nada.
+                 * Si no es JSON, es un mensaje
+                 * normal antiguo.
+                 */
+
+            }
+
+
+            return {
+
+                text:
+                    message,
+
+                reply:
+                    null
+
+            };
+
+        }
+
+
+        /* =====================================
            CARGAR MENSAJES
         ====================================== */
 
@@ -1224,7 +1519,9 @@
                 );
 
                 return;
+
             }
+
 
             data.forEach(
                 message => {
@@ -1236,6 +1533,7 @@
 
                 }
             );
+
 
             scrollToBottom();
 
@@ -1327,12 +1625,14 @@
 
             }
 
+
             const element =
                 document.createElement("div");
 
             element.classList.add(
                 "message"
             );
+
 
             if (message.id) {
 
@@ -1341,8 +1641,10 @@
 
             }
 
+
             const isMine =
                 message.username === username;
+
 
             if (isMine) {
 
@@ -1351,6 +1653,16 @@
                 );
 
             }
+
+
+            /*
+             * Parseamos el contenido guardado.
+             */
+
+            const parsed =
+                parseStoredMessage(
+                    message.message
+                );
 
 
             /* =========================
@@ -1364,6 +1676,7 @@
                 "name-wrap"
             );
 
+
             const starLeft =
                 document.createElement("span");
 
@@ -1373,6 +1686,7 @@
 
             starLeft.textContent =
                 "✦";
+
 
             const starSmall =
                 document.createElement("span");
@@ -1385,6 +1699,7 @@
             starSmall.textContent =
                 "✧";
 
+
             const name =
                 document.createElement("div");
 
@@ -1395,6 +1710,7 @@
             name.textContent =
                 message.username;
 
+
             const starRight =
                 document.createElement("span");
 
@@ -1404,6 +1720,7 @@
 
             starRight.textContent =
                 "✦";
+
 
             nameWrap.appendChild(
                 starLeft
@@ -1421,21 +1738,19 @@
                 starRight
             );
 
+
             element.appendChild(
                 nameWrap
             );
 
 
             /* =========================
-               RESPUESTA VISUAL
-               
-               Si el mensaje acaba de
-               ser enviado como respuesta,
-               usamos los datos temporales.
+               RESPUESTA GUARDADA
             ========================== */
 
             if (
-                message._replyPreview
+                parsed.reply &&
+                parsed.reply.username
             ) {
 
                 const reply =
@@ -1445,19 +1760,22 @@
                     "message-reply"
                 );
 
+
                 const replyAuthor =
                     document.createElement("strong");
 
                 replyAuthor.textContent =
                     "↩ " +
-                    message._replyPreview.username;
+                    parsed.reply.username;
+
 
                 const replyText =
                     document.createElement("span");
 
                 replyText.textContent =
-                    message._replyPreview.message ||
+                    parsed.reply.message ||
                     "Mensaje";
+
 
                 reply.appendChild(
                     replyAuthor
@@ -1466,6 +1784,7 @@
                 reply.appendChild(
                     replyText
                 );
+
 
                 element.appendChild(
                     reply
@@ -1478,7 +1797,7 @@
                TEXTO
             ========================== */
 
-            if (message.message) {
+            if (parsed.text) {
 
                 const text =
                     document.createElement("div");
@@ -1488,7 +1807,7 @@
                 );
 
                 text.textContent =
-                    message.message;
+                    parsed.text;
 
                 element.appendChild(
                     text
@@ -1529,6 +1848,7 @@
                 "message-tools"
             );
 
+
             const replyButton =
                 document.createElement("button");
 
@@ -1542,24 +1862,43 @@
             replyButton.textContent =
                 "↩ Responder";
 
+
             replyButton.addEventListener(
                 "click",
                 () => {
 
-                    startReply(
-                        message
-                    );
+                    /*
+                     * Al responder un mensaje,
+                     * usamos el texto REAL que
+                     * se muestra, no el JSON.
+                     */
+
+                    startReply({
+
+                        id:
+                            message.id,
+
+                        username:
+                            message.username,
+
+                        message:
+                            parsed.text
+
+                    });
 
                 }
             );
+
 
             tools.appendChild(
                 replyButton
             );
 
+
             element.appendChild(
                 tools
             );
+
 
             messages.appendChild(
                 element
@@ -1581,6 +1920,7 @@
 
             }
 
+
             scrollToBottom();
 
         }
@@ -1594,12 +1934,10 @@
             message
         ) {
 
-            /*
-             * Guardamos la respuesta
-             * SOLO en memoria.
-             */
-
             replyTarget = {
+
+                id:
+                    message.id || null,
 
                 username:
                     message.username,
@@ -1609,19 +1947,24 @@
 
             };
 
+
             replyName.textContent =
-                message.username;
+                replyTarget.username;
+
 
             replyPreview.textContent =
                 replyTarget.message ||
                 "Mensaje";
 
+
             replyBox.classList.add(
                 "show"
             );
 
+
             messageInput.placeholder =
                 "Escribe tu respuesta...";
+
 
             messageInput.focus();
 
@@ -1633,15 +1976,19 @@
             replyTarget =
                 null;
 
+
             replyBox.classList.remove(
                 "show"
             );
 
+
             replyName.textContent =
                 "";
 
+
             replyPreview.textContent =
                 "";
+
 
             messageInput.placeholder =
                 "Escribe un mensaje bajo las estrellas...";
@@ -1668,6 +2015,7 @@
                 return;
 
             }
+
 
             if (
                 Notification.permission ===
@@ -1699,13 +2047,16 @@
             notificationStatus.textContent =
                 text;
 
+
             notificationStatus.classList.add(
                 "show"
             );
 
+
             clearTimeout(
                 showNotificationStatus.timer
             );
+
 
             showNotificationStatus.timer =
                 setTimeout(
@@ -1728,6 +2079,7 @@
 
             flashDocumentTitle();
 
+
             if (
                 !("Notification" in window)
             ) {
@@ -1735,6 +2087,7 @@
                 return;
 
             }
+
 
             if (
                 Notification.permission !==
@@ -1745,15 +2098,38 @@
 
             }
 
+
             if (!document.hidden) {
 
                 return;
 
             }
 
+
+            const parsed =
+                parseStoredMessage(
+                    message.message
+                );
+
+
             let body =
-                message.message ||
+                parsed.text ||
                 "Nuevo mensaje";
+
+
+            if (
+                parsed.reply &&
+                parsed.reply.username
+            ) {
+
+                body =
+                    "↩ Respondió a " +
+                    parsed.reply.username +
+                    ": " +
+                    body;
+
+            }
+
 
             if (
                 body.length > 100
@@ -1765,6 +2141,7 @@
 
             }
 
+
             try {
 
                 const notification =
@@ -1772,12 +2149,15 @@
                         "Mi otra mitad · " +
                         message.username,
                         {
-                            body: body,
+                            body:
+                                body,
+
                             tag:
                                 "chat-" +
                                 chatId
                         }
                     );
+
 
                 notification.onclick =
                     () => {
@@ -1806,11 +2186,14 @@
                 titleFlashTimer
             );
 
+
             let visible =
                 false;
 
+
             let count =
                 0;
+
 
             titleFlashTimer =
                 setInterval(
@@ -1821,10 +2204,12 @@
 
                         count++;
 
+
                         document.title =
                             visible
                                 ? "💙 Nuevo mensaje"
                                 : notificationTitle;
+
 
                         if (count >= 8) {
 
@@ -1854,8 +2239,10 @@
 
                 event.preventDefault();
 
+
                 const text =
                     messageInput.value.trim();
+
 
                 if (!text) {
 
@@ -1865,17 +2252,53 @@
 
 
                 /*
-                 * IMPORTANTE:
+                 * ==================================
+                 * IMPORTANTE
+                 * ==================================
                  *
-                 * Acá NO mandamos:
+                 * Si estamos respondiendo,
+                 * guardamos la respuesta dentro
+                 * del propio campo "message".
                  *
-                 * reply_to_id
-                 * reply_to_username
-                 * reply_to_message
-                 *
-                 * porque esas columnas NO existen
-                 * en tu tabla de Supabase.
+                 * Así NO necesitamos columnas
+                 * nuevas en Supabase.
                  */
+
+
+                let storedMessage =
+                    text;
+
+
+                if (
+                    replyTarget
+                ) {
+
+                    storedMessage =
+                        JSON.stringify({
+
+                            __reply:
+                                true,
+
+                            reply: {
+
+                                id:
+                                    replyTarget.id,
+
+                                username:
+                                    replyTarget.username,
+
+                                message:
+                                    replyTarget.message
+
+                            },
+
+                            message:
+                                text
+
+                        });
+
+                }
+
 
                 const messageData = {
 
@@ -1886,7 +2309,7 @@
                         username,
 
                     message:
-                        text
+                        storedMessage
 
                 };
 
@@ -1911,11 +2334,13 @@
                         error
                     );
 
+
                     alert(
                         "No se pudo enviar el mensaje.\n\n" +
                         "Error: " +
                         error.message
                     );
+
 
                     return;
 
@@ -1923,32 +2348,8 @@
 
 
                 /*
-                 * Si estábamos respondiendo,
-                 * agregamos la referencia SOLO
-                 * al objeto visual.
-                 */
-
-                if (replyTarget && data) {
-
-                    data._replyPreview = {
-
-                        username:
-                            replyTarget.username,
-
-                        message:
-                            replyTarget.message
-
-                    };
-
-                }
-
-
-                /*
                  * Mostramos inmediatamente
                  * nuestro mensaje.
-                 *
-                 * Esto evita depender de que
-                 * Realtime nos lo devuelva.
                  */
 
                 if (data) {
@@ -1964,9 +2365,12 @@
                 messageInput.value =
                     "";
 
+
                 clearReply();
 
+
                 messageInput.focus();
+
 
                 scrollToBottom();
 
@@ -1991,13 +2395,14 @@
                     "postgres_changes",
                     {
                         event: "INSERT",
+
                         schema: "public",
+
                         table: "messages",
 
                         filter:
                             "chat_id=eq." +
                             chatId
-
                     },
 
                     payload => {
@@ -2037,13 +2442,19 @@
                     chatId,
                     {
                         config: {
+
                             presence: {
+
                                 key:
                                     crypto.randomUUID()
+
                             }
+
                         }
+
                     }
                 );
+
 
             audioChannel
 
@@ -2068,12 +2479,15 @@
                     {
                         event: "webrtc"
                     },
+
                     async ({
                         payload
                     }) => {
 
                         if (!payload) {
+
                             return;
+
                         }
 
                         await handleWebRTCSignal(
@@ -2102,6 +2516,7 @@
                             }
                         );
 
+
                         setAudioStatus(
                             "Audio listo · micrófono apagado"
                         );
@@ -2122,10 +2537,14 @@
 
             }
 
+
             const state =
                 audioChannel.presenceState();
 
-            return Object.keys(state).length;
+
+            return Object.keys(
+                state
+            ).length;
 
         }
 
@@ -2135,12 +2554,14 @@
             remotePeerPresent =
                 getPresenceCount() > 1;
 
+
             if (
                 remotePeerPresent &&
                 audioStarted
             ) {
 
                 await ensurePeerConnection();
+
 
                 if (!makingOffer) {
 
@@ -2158,9 +2579,11 @@
             remotePeerPresent =
                 true;
 
+
             if (audioStarted) {
 
                 await ensurePeerConnection();
+
 
                 if (!makingOffer) {
 
@@ -2185,6 +2608,7 @@
 
             }
 
+
             peerConnection =
                 new RTCPeerConnection(
                     rtcConfig
@@ -2199,6 +2623,7 @@
                         return;
 
                     }
+
 
                     await sendSignal({
 
@@ -2233,6 +2658,7 @@
 
                     }
 
+
                     try {
 
                         await remoteAudio.play();
@@ -2245,6 +2671,7 @@
                         );
 
                     }
+
 
                     setAudioStatus(
                         "🔊 Audio conectado",
@@ -2263,8 +2690,10 @@
 
                     }
 
+
                     const state =
                         peerConnection.connectionState;
+
 
                     if (
                         state ===
@@ -2279,6 +2708,7 @@
                         );
 
                     }
+
 
                     if (
                         state === "failed" ||
@@ -2311,6 +2741,7 @@
 
             }
 
+
             return peerConnection;
 
         }
@@ -2327,6 +2758,7 @@
                 return localStream;
 
             }
+
 
             try {
 
@@ -2358,8 +2790,10 @@
                     localStream
                         .getAudioTracks()[0];
 
+
                 localAudioTrack.enabled =
                     false;
+
 
                 return localStream;
 
@@ -2369,6 +2803,7 @@
                     "Error micrófono:",
                     error
                 );
+
 
                 if (
                     error.name ===
@@ -2386,6 +2821,7 @@
                     );
 
                 }
+
 
                 return null;
 
@@ -2412,24 +2848,29 @@
 
                 }
 
+
                 if (!localStream) {
 
                     micButton.classList.add(
                         "waiting"
                     );
 
+
                     const stream =
                         await getLocalMicrophone();
+
 
                     micButton.classList.remove(
                         "waiting"
                     );
+
 
                     if (!stream) {
 
                         return;
 
                     }
+
 
                     await ensurePeerConnection();
 
@@ -2446,6 +2887,7 @@
                 localAudioTrack.enabled =
                     !localAudioTrack.enabled;
 
+
                 audioStarted =
                     localAudioTrack.enabled;
 
@@ -2456,16 +2898,20 @@
                         "active"
                     );
 
+
                     micButton.textContent =
                         "🎙️";
 
+
                     micButton.title =
                         "Apagar micrófono";
+
 
                     micButton.setAttribute(
                         "aria-label",
                         "Apagar micrófono"
                     );
+
 
                     setAudioStatus(
                         remotePeerPresent
@@ -2478,6 +2924,7 @@
                     if (remotePeerPresent) {
 
                         await ensurePeerConnection();
+
 
                         if (!makingOffer) {
 
@@ -2493,16 +2940,20 @@
                         "active"
                     );
 
+
                     micButton.textContent =
                         "📞";
 
+
                     micButton.title =
                         "Activar micrófono";
+
 
                     micButton.setAttribute(
                         "aria-label",
                         "Activar micrófono"
                     );
+
 
                     setAudioStatus(
                         "🔇 Micrófono apagado"
@@ -2530,19 +2981,23 @@
 
             }
 
+
             try {
 
                 makingOffer =
                     true;
 
+
                 const offer =
                     await peerConnection
                         .createOffer();
+
 
                 await peerConnection
                     .setLocalDescription(
                         offer
                     );
+
 
                 await sendSignal({
 
@@ -2584,6 +3039,7 @@
                 return;
 
             }
+
 
             try {
 
@@ -2629,6 +3085,7 @@
 
             }
 
+
             try {
 
                 /* OFFER */
@@ -2640,6 +3097,7 @@
 
                     await ensurePeerConnection();
 
+
                     await peerConnection
                         .setRemoteDescription(
                             new RTCSessionDescription(
@@ -2647,14 +3105,17 @@
                             )
                         );
 
+
                     const answer =
                         await peerConnection
                             .createAnswer();
+
 
                     await peerConnection
                         .setLocalDescription(
                             answer
                         );
+
 
                     await sendSignal({
 
@@ -2682,6 +3143,7 @@
 
                     }
 
+
                     await peerConnection
                         .setRemoteDescription(
                             new RTCSessionDescription(
@@ -2707,6 +3169,7 @@
                         return;
 
                     }
+
 
                     try {
 
@@ -2759,11 +3222,13 @@
 
                 }
 
+
                 if (peerConnection) {
 
                     peerConnection.close();
 
                 }
+
 
                 if (audioChannel) {
 
@@ -2782,6 +3247,7 @@
                 clearInterval(
                     titleFlashTimer
                 );
+
 
                 document.title =
                     notificationTitle;
