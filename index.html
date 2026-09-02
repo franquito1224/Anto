@@ -1,4 +1,3 @@
-¿¿¿¿
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -213,6 +212,7 @@ body::after{
 }
 
 #mic-button,
+#camera-button,
 #clear-chat-button{
     width:46px;
     height:46px;
@@ -226,6 +226,7 @@ body::after{
 }
 
 #mic-button:hover,
+#camera-button:hover,
 #clear-chat-button:hover{
     transform:scale(1.06);
 }
@@ -256,6 +257,60 @@ body::after{
     50%{
         box-shadow:0 0 0 9px rgba(66,211,146,0);
     }
+}
+
+#video-panel{
+    position:fixed;
+    right:18px;
+    top:132px;
+    z-index:19;
+    display:none;
+    gap:10px;
+    flex-direction:column;
+    width:min(260px,calc(100vw - 36px));
+}
+#video-panel.show{display:flex;}
+.video-card{
+    position:relative;
+    overflow:hidden;
+    aspect-ratio:16/10;
+    border-radius:16px;
+    background:#020a18;
+    border:1px solid rgba(142,216,255,.20);
+    box-shadow:0 12px 35px rgba(0,0,0,.35);
+}
+.video-card video{
+    display:block;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    background:#020a18;
+}
+.video-card span{
+    position:absolute;
+    left:9px;
+    bottom:8px;
+    padding:4px 8px;
+    border-radius:8px;
+    background:rgba(3,14,30,.72);
+    color:#d7efff;
+    font-size:10px;
+    backdrop-filter:blur(6px);
+}
+.remote-video-card{display:none;}
+.remote-video-card.visible{display:block;}
+#camera-button.active{
+    background:linear-gradient(145deg,#3d8eea,#58b7f4);
+    border-color:rgba(190,231,255,.75);
+    box-shadow:0 0 22px rgba(88,183,244,.32);
+}
+#camera-button.waiting{animation:pulseCamera 1.5s infinite;}
+@keyframes pulseCamera{
+    0%,100%{box-shadow:0 0 0 0 rgba(88,183,244,.35);}
+    50%{box-shadow:0 0 0 9px rgba(88,183,244,0);}
+}
+@media(max-width:600px){
+    #video-panel{top:122px;right:10px;width:180px;}
 }
 
 #audio-status{
@@ -531,6 +586,89 @@ body::after{
     background:rgba(189,82,103,.10);
 }
 
+/* DESVANECIMIENTO ESTELAR */
+.message.is-fading{
+    position:relative;
+    overflow:hidden;
+    pointer-events:none;
+    animation:starDust 1.15s ease forwards;
+}
+
+.message.is-fading::before,
+.message.is-fading::after{
+    content:"✦  ·  ✧  ⋆  ·  ✦  ·  ✧  ⋆  ✦  ·  ⋆  ✧";
+    position:absolute;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:rgba(210,241,255,.95);
+    font-size:13px;
+    letter-spacing:7px;
+    white-space:nowrap;
+    pointer-events:none;
+    opacity:0;
+    filter:blur(.2px);
+}
+
+.message.is-fading::before{
+    animation:dustBurst 1.05s ease forwards;
+}
+
+.message.is-fading::after{
+    animation:dustBurst 1.05s .12s ease forwards reverse;
+}
+
+@keyframes starDust{
+    0%{opacity:1; transform:scale(1); filter:blur(0);}
+    45%{opacity:.8; transform:scale(1.015); filter:blur(.4px);}
+    100%{opacity:0; transform:scale(.94); filter:blur(8px);}
+}
+
+@keyframes dustBurst{
+    0%{opacity:0; transform:scale(.65) translateY(5px);}
+    30%{opacity:1; transform:scale(1.05) translateY(0);}
+    100%{opacity:0; transform:scale(1.55) translateY(-8px);}
+}
+
+.message.is-deleted{
+    pointer-events:auto;
+    max-width:75%;
+    padding:12px 16px;
+    background:rgba(95,137,177,.13)!important;
+    border:1px solid rgba(174,220,248,.13)!important;
+    box-shadow:0 7px 25px rgba(0,0,0,.15), inset 0 0 22px rgba(174,220,248,.035)!important;
+    backdrop-filter:blur(9px);
+    animation:deletedAppear .45s ease-out forwards;
+}
+
+.deleted-message{
+    display:flex;
+    align-items:center;
+    gap:9px;
+    color:#9ebbd2;
+    font-size:12px;
+    font-style:italic;
+}
+
+.deleted-message .deleted-icon{
+    color:#c9ecff;
+    font-size:15px;
+    text-shadow:0 0 9px rgba(201,236,255,.65);
+}
+
+.deleted-message .deleted-time{
+    margin-left:auto;
+    font-size:10px;
+    color:#6f91aa;
+    font-style:normal;
+}
+
+@keyframes deletedAppear{
+    from{opacity:0; transform:scale(.96); filter:blur(5px);}
+    to{opacity:1; transform:scale(1); filter:blur(0);}
+}
+
 /* MENSAJE */
 
 .message-area{
@@ -656,6 +794,7 @@ body::after{
     }
 
     #mic-button,
+    #camera-button,
     #clear-chat-button{
         width:40px;
         height:40px;
@@ -667,6 +806,10 @@ body::after{
     }
 
     .message{
+        max-width:85%;
+    }
+
+    .message.is-deleted{
         max-width:85%;
     }
 
@@ -777,15 +920,35 @@ body::after{
         <button
             id="mic-button"
             type="button"
-            aria-label="Activar llamada"
+            aria-label="Activar micrófono"
             title="Activar micrófono"
         >
             📞
         </button>
 
+        <button
+            id="camera-button"
+            type="button"
+            aria-label="Activar cámara"
+            title="Activar cámara"
+        >
+            📷
+        </button>
+
     </div>
 
 </header>
+
+<div id="video-panel">
+    <div class="video-card local-video-card">
+        <video id="local-video" autoplay muted playsinline></video>
+        <span>📷 Tú</span>
+    </div>
+    <div class="video-card remote-video-card">
+        <video id="remote-video" autoplay playsinline></video>
+        <span>📷 La otra persona</span>
+    </div>
+</div>
 
 <div id="audio-status"></div>
 
@@ -938,6 +1101,21 @@ const messages =
 const micButton =
     document.getElementById("mic-button");
 
+const cameraButton =
+    document.getElementById("camera-button");
+
+const videoPanel =
+    document.getElementById("video-panel");
+
+const localVideo =
+    document.getElementById("local-video");
+
+const remoteVideo =
+    document.getElementById("remote-video");
+
+const remoteVideoCard =
+    document.querySelector(".remote-video-card");
+
 const audioStatus =
     document.getElementById("audio-status");
 
@@ -997,8 +1175,10 @@ let audioChannel = null;
 let peerConnection = null;
 let localStream = null;
 let localAudioTrack = null;
+let localVideoTrack = null;
 
 let audioStarted = false;
+let cameraStarted = false;
 let remotePeerPresent = false;
 let makingOffer = false;
 
@@ -1115,7 +1295,8 @@ function parseStoredMessage(message){
         return{
             text:"",
             reply:null,
-            image:null
+            image:null,
+            deleted:false
         };
 
     }
@@ -1134,7 +1315,8 @@ function parseStoredMessage(message){
             return{
                 text:parsed.message,
                 reply:parsed.reply||null,
-                image:parsed.image||null
+                image:parsed.image||null,
+                deleted:parsed.deleted===true
             };
 
         }
@@ -1144,7 +1326,8 @@ function parseStoredMessage(message){
     return{
         text:message,
         reply:null,
-        image:null
+        image:null,
+        deleted:false
     };
 }
 
@@ -1303,6 +1486,32 @@ function addMessageToScreen(
         parseStoredMessage(
             message.message
         );
+
+    // Los mensajes "desvanecidos" siguen existiendo en Supabase,
+    // pero se muestran como un pequeño bloque borroso.
+    if(parsed.deleted){
+        element.classList.add("is-deleted");
+
+        const deletedWrap=document.createElement("div");
+        deletedWrap.className="deleted-message";
+
+        const icon=document.createElement("span");
+        icon.className="deleted-icon";
+        icon.textContent="✦";
+
+        const deletedText=document.createElement("span");
+        deletedText.textContent="Este mensaje se desvaneció entre las estrellas";
+
+        const deletedTime=document.createElement("span");
+        deletedTime.className="deleted-time";
+        deletedTime.textContent=formatMessageTime(message.created_at);
+
+        deletedWrap.append(icon,deletedText,deletedTime);
+        element.appendChild(deletedWrap);
+        messages.appendChild(element);
+        scrollToBottom();
+        return;
+    }
 
 
     /* NOMBRE */
@@ -1537,7 +1746,7 @@ function addMessageToScreen(
         );
 
         deleteButton.textContent =
-            "🗑️ Borrar";
+            "✦ Desvanecer";
 
         deleteButton.addEventListener(
             "click",
@@ -1700,7 +1909,7 @@ imageInput.addEventListener(
                 extension;
 
             const filePath =
-                chatId+"/"+fileName;
+                "public/"+chatId+"/"+fileName;
 
             const {error:uploadError} =
                 await supabaseClient
@@ -1908,55 +2117,102 @@ async function deleteMessage(
     }
 
     if(message.username!==username){
-
-        alert(
-            "Solo puedes borrar tus propios mensajes."
+        showNotificationStatus(
+            "Solo puedes desvanecer tus propios mensajes."
         );
-
         return;
     }
 
-    if(
-        !confirm(
-            "¿Quieres borrar este mensaje?"
-        )
-    ){
+    if(element.classList.contains("is-fading") ||
+       element.classList.contains("is-deleted")){
         return;
     }
 
-    const parsed =
-        parseStoredMessage(
-            message.message
-        );
+    if(!confirm("¿Quieres hacer que este mensaje se desvanezca?")){
+        return;
+    }
 
-    const {error} =
-        await supabaseClient
+    const parsed = parseStoredMessage(message.message);
+
+    // Primero hacemos la animación local para que la acción se sienta inmediata.
+    element.classList.add("is-fading");
+
+    try{
+        // Soft delete: no borramos la fila de Supabase.
+        // La convertimos en un mensaje de "desvanecido" para que
+        // también desaparezca visualmente en los demás dispositivos.
+        const deletedPayload = {
+            __chat:true,
+            deleted:true,
+            deletedBy:username,
+            originalHasImage:!!parsed.image,
+            message:"",
+            reply:null,
+            image:null
+        };
+
+        const {error} = await supabaseClient
             .from("messages")
-            .delete()
+            .update({
+                message:JSON.stringify(deletedPayload)
+            })
             .eq("id",message.id)
             .eq("username",username);
 
-    if(error){
+        if(error){
+            console.error("Error haciendo soft delete:",error);
+            element.classList.remove("is-fading");
+            alert(
+                "No se pudo desvanecer el mensaje.\n\n"+
+                error.message+
+                "\n\nSi aparece un error de permisos, necesitas una política UPDATE en Supabase."
+            );
+            return;
+        }
 
+        if(parsed.image){
+            await deleteStorageImage(parsed.image);
+        }
+
+        await replaceWithDeletedMessage(element,message);
+
+        showNotificationStatus("✦ El mensaje se desvaneció");
+
+    }catch(error){
+        console.error(error);
+        element.classList.remove("is-fading");
         alert(
-            "No se pudo borrar el mensaje.\n\n"+
+            "Ocurrió un error al desvanecer el mensaje.\n\n"+
             error.message
         );
-
-        return;
     }
+}
 
-    if(parsed.image){
-        await deleteStorageImage(
-            parsed.image
-        );
-    }
+function replaceWithDeletedMessage(element,message){
+    return new Promise(resolve=>{
+        setTimeout(()=>{
+            element.className="message is-deleted";
+            element.innerHTML="";
 
-    element.remove();
+            const deletedWrap=document.createElement("div");
+            deletedWrap.className="deleted-message";
 
-    showNotificationStatus(
-        "🗑️ Mensaje borrado"
-    );
+            const icon=document.createElement("span");
+            icon.className="deleted-icon";
+            icon.textContent="✦";
+
+            const text=document.createElement("span");
+            text.textContent="Este mensaje se desvaneció entre las estrellas";
+
+            const time=document.createElement("span");
+            time.className="deleted-time";
+            time.textContent=formatMessageTime(message.created_at);
+
+            deletedWrap.append(icon,text,time);
+            element.appendChild(deletedWrap);
+            resolve();
+        },1150);
+    });
 }
 
 
@@ -2305,6 +2561,43 @@ function subscribeToMessages(){
         .on(
             "postgres_changes",
             {
+                event:"UPDATE",
+                schema:"public",
+                table:"messages",
+                filter:
+                    "chat_id=eq."+chatId
+            },
+            payload=>{
+                const updated=payload.new;
+                if(!updated || !updated.id){
+                    return;
+                }
+
+                const existing=messages.querySelector(
+                    `[data-message-id="${updated.id}"]`
+                );
+
+                const parsed=parseStoredMessage(updated.message);
+
+                if(parsed.deleted){
+                    if(existing){
+                        existing.classList.remove("is-deleted");
+                        existing.classList.add("is-fading");
+                        setTimeout(()=>{
+                            replaceWithDeletedMessage(existing,updated);
+                        },80);
+                    }else{
+                        addMessageToScreen(updated,false);
+                    }
+                }
+            }
+        )
+
+        // Compatibilidad: si alguna fila se elimina desde otro sitio,
+        // la quitamos de la pantalla sin romper el chat.
+        .on(
+            "postgres_changes",
+            {
                 event:"DELETE",
                 schema:"public",
                 table:"messages",
@@ -2312,16 +2605,12 @@ function subscribeToMessages(){
                     "chat_id=eq."+chatId
             },
             payload=>{
-
                 if(!payload.old){
                     return;
                 }
-
-                const deleted =
-                    messages.querySelector(
-                        `[data-message-id="${payload.old.id}"]`
-                    );
-
+                const deleted=messages.querySelector(
+                    `[data-message-id="${payload.old.id}"]`
+                );
                 if(deleted){
                     deleted.remove();
                 }
@@ -2477,35 +2766,65 @@ async function ensurePeerConnection(){
     peerConnection.ontrack =
         async event=>{
 
-            if(
-                event.streams &&
-                event.streams[0]
-            ){
+            const track = event.track;
 
-                remoteAudio.srcObject =
-                    event.streams[0];
+            if(track.kind==="video"){
 
+                let stream = remoteVideo.srcObject;
+
+                if(!stream){
+                    stream = new MediaStream();
+                    remoteVideo.srcObject = stream;
+                }
+
+                if(!stream.getTracks().some(
+                    existing=>existing.id===track.id
+                )){
+                    stream.addTrack(track);
+                }
+
+                remoteVideoCard.classList.add("visible");
+                videoPanel.classList.add("show");
+
+                try{
+                    await remoteVideo.play();
+                }catch(error){
+                    console.warn("El navegador bloqueó el video:",error);
+                }
+
+                track.onended=()=>{
+                    stream.removeTrack(track);
+                    if(!stream.getVideoTracks().length){
+                        remoteVideoCard.classList.remove("visible");
+                        if(!cameraStarted){
+                            videoPanel.classList.remove("show");
+                        }
+                    }
+                };
+
+                setAudioStatus(
+                    audioStarted
+                    ?"🎙️ Micrófono activo · 📷 video conectado"
+                    :"📷 Video conectado · micrófono apagado",
+                    audioStarted
+                );
+
+                return;
+            }
+
+            if(event.streams && event.streams[0]){
+                remoteAudio.srcObject = event.streams[0];
             }else{
-
-                remoteAudio.srcObject =
-                    new MediaStream([
-                        event.track
-                    ]);
+                remoteAudio.srcObject = new MediaStream([track]);
             }
 
             try{
                 await remoteAudio.play();
             }catch(error){
-                console.warn(
-                    "El navegador bloqueó el audio:",
-                    error
-                );
+                console.warn("El navegador bloqueó el audio:",error);
             }
 
-            setAudioStatus(
-                "🔊 Audio conectado",
-                true
-            );
+            setAudioStatus("🔊 Audio conectado",true);
         };
 
     peerConnection.onconnectionstatechange =
@@ -2562,57 +2881,224 @@ async function ensurePeerConnection(){
 
 async function getLocalMicrophone(){
 
-    if(localStream){
+    if(localAudioTrack){
         return localStream;
     }
 
     try{
 
-        localStream =
-            await navigator
-                .mediaDevices
-                .getUserMedia({
-                    audio:{
-                        echoCancellation:true,
-                        noiseSuppression:true,
-                        autoGainControl:true
-                    },
-                    video:false
-                });
+        const microphoneStream =
+            await navigator.mediaDevices.getUserMedia({
+                audio:{
+                    echoCancellation:true,
+                    noiseSuppression:true,
+                    autoGainControl:true
+                },
+                video:false
+            });
 
         localAudioTrack =
-            localStream
-                .getAudioTracks()[0];
+            microphoneStream.getAudioTracks()[0];
 
         localAudioTrack.enabled=false;
+
+        if(!localStream){
+            localStream = new MediaStream();
+        }
+
+        localStream.addTrack(localAudioTrack);
 
         return localStream;
 
     }catch(error){
 
-        console.error(
-            "Error micrófono:",
-            error
-        );
+        console.error("Error micrófono:",error);
 
-        if(
-            error.name==="NotAllowedError"
-        ){
-
-            alert(
-                "Necesitas permitir el micrófono en el navegador."
-            );
-
+        if(error.name==="NotAllowedError"){
+            alert("Necesitas permitir el micrófono en el navegador.");
         }else{
-
-            alert(
-                "No se pudo acceder al micrófono."
-            );
+            alert("No se pudo acceder al micrófono.");
         }
 
         return null;
     }
 }
+
+async function getLocalCamera(){
+
+    if(localVideoTrack){
+        return localVideoTrack;
+    }
+
+    if(!navigator.mediaDevices ||
+       !navigator.mediaDevices.getUserMedia){
+        alert(
+            "Tu navegador no permite usar la cámara aquí. Abre la página desde HTTPS, por ejemplo GitHub Pages."
+        );
+        return null;
+    }
+
+    try{
+
+        const cameraStream =
+            await navigator.mediaDevices.getUserMedia({
+                video:{
+                    facingMode:"user",
+                    width:{ideal:1280},
+                    height:{ideal:720}
+                },
+                audio:false
+            });
+
+        localVideoTrack =
+            cameraStream.getVideoTracks()[0];
+
+        if(!localVideoTrack){
+            throw new Error("No se encontró una pista de cámara.");
+        }
+
+        if(!localStream){
+            localStream = new MediaStream();
+        }
+
+        localStream.addTrack(localVideoTrack);
+
+        localVideo.srcObject =
+            new MediaStream([localVideoTrack]);
+
+        videoPanel.classList.add("show");
+
+        return localVideoTrack;
+
+    }catch(error){
+
+        console.error("Error cámara:",error);
+
+        if(error.name==="NotAllowedError"){
+            alert("Necesitas permitir la cámara en el navegador para compartir video.");
+        }else if(error.name==="NotFoundError"){
+            alert("No se encontró una cámara disponible.");
+        }else if(error.name==="NotReadableError"){
+            alert("La cámara está siendo usada por otra aplicación.");
+        }else{
+            alert("No se pudo acceder a la cámara.\n\n"+error.message);
+        }
+
+        return null;
+    }
+}
+
+async function removeLocalCamera(){
+
+    if(!localVideoTrack){
+        return;
+    }
+
+    const oldTrack = localVideoTrack;
+    oldTrack.stop();
+
+    if(localStream){
+        localStream.removeTrack(oldTrack);
+    }
+
+    const sender =
+        peerConnection &&
+        peerConnection.getSenders().find(
+            item=>item.track &&
+            item.track.id===oldTrack.id
+        );
+
+    if(sender){
+        try{
+            await sender.replaceTrack(null);
+        }catch(error){
+            console.warn("No se pudo retirar el video:",error);
+        }
+    }
+
+    localVideoTrack=null;
+    localVideo.srcObject=null;
+
+    if(!remoteVideoCard.classList.contains("visible")){
+        videoPanel.classList.remove("show");
+    }
+
+    if(peerConnection && remotePeerPresent){
+        await createOffer();
+    }
+}
+
+cameraButton.addEventListener(
+    "click",
+    async ()=>{
+
+        if(!audioChannel){
+            setAudioStatus("La conexión todavía está iniciándose...");
+            return;
+        }
+
+        if(!cameraStarted){
+
+            cameraButton.classList.add("waiting");
+
+            const track =
+                await getLocalCamera();
+
+            cameraButton.classList.remove("waiting");
+
+            if(!track){
+                return;
+            }
+
+            await ensurePeerConnection();
+
+            if(
+                peerConnection &&
+                !peerConnection.getSenders().some(
+                    sender=>sender.track &&
+                    sender.track.id===track.id
+                )
+            ){
+                peerConnection.addTrack(track,localStream);
+            }
+
+            cameraStarted=true;
+
+            cameraButton.classList.add("active");
+            cameraButton.textContent="📹";
+            cameraButton.title="Apagar cámara";
+
+            if(remotePeerPresent){
+                await createOffer();
+            }
+
+            setAudioStatus(
+                remotePeerPresent
+                ?"📷 Cámara activa · video conectado"
+                :"📷 Cámara activa · esperando a la otra persona",
+                true
+            );
+
+        }else{
+
+            cameraStarted=false;
+
+            await removeLocalCamera();
+
+            cameraButton.classList.remove("active");
+            cameraButton.textContent="📷";
+            cameraButton.title="Activar cámara";
+
+            setAudioStatus(
+                audioStarted
+                ?"🎙️ Micrófono activo"
+                :"📷 Cámara apagada"
+            );
+        }
+    }
+);
+
+
 
 
 /* =====================================
@@ -2650,6 +3136,20 @@ micButton.addEventListener(
             }
 
             await ensurePeerConnection();
+
+            if(
+                peerConnection &&
+                localAudioTrack &&
+                !peerConnection.getSenders().some(
+                    sender=>sender.track &&
+                    sender.track.id===localAudioTrack.id
+                )
+            ){
+                peerConnection.addTrack(
+                    localAudioTrack,
+                    localStream
+                );
+            }
         }
 
         if(!localAudioTrack){
@@ -2884,6 +3384,10 @@ window.addEventListener(
 
         if(peerConnection){
             peerConnection.close();
+        }
+
+        if(localVideoTrack){
+            localVideoTrack.stop();
         }
 
         if(audioChannel){
